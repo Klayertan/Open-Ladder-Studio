@@ -1,0 +1,208 @@
+{
+  "columns" : 10,
+  "elements" : [
+    {
+      "comment" : "",
+      "id" : "5BC63729-045F-4596-B12E-C5EF442B9819",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 0,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "A3C8AB81-38C3-46DD-9357-AEC2AA9CA13D",
+      "kind" : "normallyOpen",
+      "label" : "X0",
+      "position" : {
+        "column" : 1,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "E7363692-2A55-4CB6-B069-4B8A4B3DBCA3",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 2,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "7EF332C2-55CB-4425-9671-E8BA6FC4FD4D",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 3,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "BD1E58AE-B2D9-48D6-A583-5A972787592E",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 4,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "19635484-D8D0-4DC3-A97B-DDF1F1EB4E3F",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 5,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "769AD5EE-E5E0-40FB-8A20-64EF0C63A7B0",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 6,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "15B64723-9CE9-46DA-9F85-69EE73876007",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 7,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "C41E3F2D-8618-44C1-843F-F9B73C8F4445",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 8,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "EE6A35C6-121B-4C99-B24F-A5E5A0220DCB",
+      "kind" : "setCoil",
+      "label" : "M0",
+      "position" : {
+        "column" : 9,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "D03A01E7-6941-492C-947A-B6597B8737E1",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 0,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "480651AB-0EA3-49EE-930D-0BA7F97F5D76",
+      "kind" : "normallyOpen",
+      "label" : "X1",
+      "position" : {
+        "column" : 1,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "6989717C-3DEA-4673-AAC8-4D2BDCD44CB8",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 2,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "59666869-EE74-4BB6-BB02-44B71B3E497B",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 3,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "37AA54CB-90AF-4F24-A92E-8E6E303FCD21",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 4,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "6F751BAD-10D9-4371-BC16-4F621E078872",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 5,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "30296FBA-2866-40EC-91EC-DECE5AC760EF",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 6,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "99AD7AD1-72C8-4DAF-B3A6-DB54D6466E17",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 7,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "A15F4AA0-AC77-4728-B33D-12B1F76240DF",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 8,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "369271A7-0FF6-407B-9413-384E2B25BF2E",
+      "kind" : "resetCoil",
+      "label" : "M0",
+      "position" : {
+        "column" : 9,
+        "row" : 2
+      }
+    }
+  ],
+  "name" : "Set and reset memory",
+  "rows" : 10,
+  "version" : 2
+}

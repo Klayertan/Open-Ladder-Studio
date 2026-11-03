@@ -1,0 +1,138 @@
+{
+  "columns" : 10,
+  "elements" : [
+    {
+      "comment" : "",
+      "id" : "6915E2BC-8BCA-41A6-8539-579ABA5CD008",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 0,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "3A64EE22-3955-492C-A2CD-BC1B08F20966",
+      "kind" : "normallyOpen",
+      "label" : "X0",
+      "position" : {
+        "column" : 1,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "17C72B02-4FE3-49C9-BCB6-00865280FDF6",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 2,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "0A2ED573-C39D-4F3C-A000-CE309F6FF68D",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 3,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "0E684986-3EC5-4D78-85E3-7397E79CA096",
+      "kind" : "normallyClosed",
+      "label" : "X1",
+      "position" : {
+        "column" : 4,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "68CAC8D7-23EA-4C8C-B3CF-D5B6D8537357",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 5,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "30BDF6A3-5440-4B3D-A8FA-C5416B94F2BD",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 6,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "8C6C3692-F58E-4021-8B05-44F0422BC69A",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 7,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "A351AE23-8F3B-496C-83AF-CE86E4D5AF2E",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 8,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "84085F44-D636-4C4F-9BD8-61E7AD21DB82",
+      "kind" : "coil",
+      "label" : "Y0",
+      "position" : {
+        "column" : 9,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "E5049A60-9E7B-4145-971E-AF8F8D341B5A",
+      "kind" : "verticalWire",
+      "label" : "",
+      "position" : {
+        "column" : 1,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "Seal-in contact",
+      "id" : "F9C21336-1C8B-4D6E-9851-3E130D7A0036",
+      "kind" : "normallyOpen",
+      "label" : "Y0",
+      "position" : {
+        "column" : 1,
+        "row" : 1
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "96DDF568-BBE3-4874-9C23-D002CA352C8C",
+      "kind" : "verticalWire",
+      "label" : "",
+      "position" : {
+        "column" : 2,
+        "row" : 0
+      }
+    }
+  ],
+  "name" : "Motor seal-in",
+  "rows" : 10,
+  "version" : 2
+}

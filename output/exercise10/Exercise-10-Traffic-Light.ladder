@@ -1,0 +1,741 @@
+{
+  "columns" : 10,
+  "elements" : [
+    {
+      "comment" : "",
+      "id" : "61A2AD03-9D2B-423B-9F7A-14C976D91C21",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 0,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "点滅停止PB",
+      "id" : "9442477D-E5A4-4312-95EB-880B56B50496",
+      "kind" : "normallyClosed",
+      "label" : "X1",
+      "position" : {
+        "column" : 1,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "F71C2882-2BCA-4F90-8640-7512CBF43385",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 2,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "スタートPB",
+      "id" : "A3E35335-480E-4552-9350-7C9F981A1FA7",
+      "kind" : "normallyOpen",
+      "label" : "X0",
+      "position" : {
+        "column" : 3,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "E1B3AE0A-85EA-435E-8FC0-5586480265A4",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 4,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "DA4CC008-8721-4564-9D63-B66BB4B984F6",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 5,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "15E15004-6B54-4CA5-BF81-A8A5989EAC33",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 6,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "5B5119C2-55EA-410F-8493-A0EEEB22006B",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 7,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "82FC8029-9A0E-4C42-B04C-4C25975C39FE",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 8,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "運転自己保持",
+      "id" : "C2C36807-24B2-401F-A34B-239FE8BE2723",
+      "kind" : "coil",
+      "label" : "M0",
+      "position" : {
+        "column" : 9,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "2F2749AC-026B-4085-8F11-906E7224EA21",
+      "kind" : "verticalWire",
+      "label" : "",
+      "position" : {
+        "column" : 3,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "自己保持接点",
+      "id" : "9A815660-E45F-4F31-9EB9-B9D16ECDF15A",
+      "kind" : "normallyOpen",
+      "label" : "M0",
+      "position" : {
+        "column" : 3,
+        "row" : 1
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "94716F4E-0ABD-4C0B-98E5-D303BA7EE3EC",
+      "kind" : "verticalWire",
+      "label" : "",
+      "position" : {
+        "column" : 4,
+        "row" : 0
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "03E9A31D-1840-488D-A0CA-D5BE2CB8AB35",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 0,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "運転中",
+      "id" : "E8F40E00-5BBB-4E40-B7C3-EDCD4EC9C920",
+      "kind" : "normallyOpen",
+      "label" : "M0",
+      "position" : {
+        "column" : 1,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "7D60FCD5-694A-4100-B9CF-58CF2977073A",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 2,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "一周期リセット",
+      "id" : "FE978568-EA42-4044-9DC4-72414BC192BC",
+      "kind" : "normallyClosed",
+      "label" : "T2",
+      "position" : {
+        "column" : 3,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "61650945-20F3-47E8-BF70-F86F45A54353",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 4,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "568FF9D7-B129-47B3-8B27-90181F52ACEA",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 5,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "3493FE8F-6C79-44A4-A57F-D8D907711AC7",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 6,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "89365642-18D4-456C-B712-7ADB7BC98E8F",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 7,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "1397FCA7-2FFC-4332-8DD2-79C0A4AD13B8",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 8,
+        "row" : 2
+      }
+    },
+    {
+      "comment" : "青10秒",
+      "id" : "0DB1F423-AB0A-4E45-A43A-48B03B72114E",
+      "kind" : "timer",
+      "label" : "T0",
+      "position" : {
+        "column" : 9,
+        "row" : 2
+      },
+      "timerPresetMilliseconds" : 10000
+    },
+    {
+      "comment" : "",
+      "id" : "13A1A2D8-297C-489D-9331-7FD2E49A12C7",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 0,
+        "row" : 3
+      }
+    },
+    {
+      "comment" : "青時間完了",
+      "id" : "9E750AE7-06AD-4F60-8770-3363843528E9",
+      "kind" : "normallyOpen",
+      "label" : "T0",
+      "position" : {
+        "column" : 1,
+        "row" : 3
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "8E7D41CA-765B-4C41-94DC-053BB7E5B8D7",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 2,
+        "row" : 3
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "CE2D061E-AD20-4B47-82C5-3A1AA67F9EAE",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 3,
+        "row" : 3
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "84ACB0B1-1485-4E71-828B-0E1C20C60956",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 4,
+        "row" : 3
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "93897ABB-1BBA-49C2-A78D-F6AEEFD2829D",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 5,
+        "row" : 3
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "8113B612-58E7-4220-B9FB-D1C651A1CDAE",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 6,
+        "row" : 3
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "58B51D33-671E-47BD-AE92-7C60D33DFEE9",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 7,
+        "row" : 3
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "A5593780-E0B6-4A72-A8B3-95FEB6936FDE",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 8,
+        "row" : 3
+      }
+    },
+    {
+      "comment" : "黄2秒",
+      "id" : "9D800D87-A70C-4D00-A942-79019D511B28",
+      "kind" : "timer",
+      "label" : "T1",
+      "position" : {
+        "column" : 9,
+        "row" : 3
+      },
+      "timerPresetMilliseconds" : 2000
+    },
+    {
+      "comment" : "",
+      "id" : "508D2F98-3AFA-4FCA-BB1C-841B2F595EA4",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 0,
+        "row" : 4
+      }
+    },
+    {
+      "comment" : "黄時間完了",
+      "id" : "C18838A3-FC86-48A2-8B81-0C3C3CB459B5",
+      "kind" : "normallyOpen",
+      "label" : "T1",
+      "position" : {
+        "column" : 1,
+        "row" : 4
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "E9035FEB-4E7F-4AD5-B215-3F4E6F277913",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 2,
+        "row" : 4
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "9DD065DB-BA56-4078-9B80-68FCFB2EA797",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 3,
+        "row" : 4
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "040F36B4-A697-4FBF-BC9F-13AF6E1F2825",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 4,
+        "row" : 4
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "FB7D10B5-7148-45E3-9C32-0953A9F71241",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 5,
+        "row" : 4
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "ACA6D9AF-0807-4832-B70E-D6E214B4BFB5",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 6,
+        "row" : 4
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "3B7F8466-8676-4559-B798-7C0A204ADC74",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 7,
+        "row" : 4
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "DA60A0A4-FEAE-455E-97C2-861A4B809905",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 8,
+        "row" : 4
+      }
+    },
+    {
+      "comment" : "赤5秒",
+      "id" : "FB5E5D23-09E3-4EAF-BCA8-A7EF0F5AE9F3",
+      "kind" : "timer",
+      "label" : "T2",
+      "position" : {
+        "column" : 9,
+        "row" : 4
+      },
+      "timerPresetMilliseconds" : 5000
+    },
+    {
+      "comment" : "",
+      "id" : "04795694-55EA-4994-B871-3190D27B45F9",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 0,
+        "row" : 5
+      }
+    },
+    {
+      "comment" : "運転中",
+      "id" : "DE643ED5-DF95-419B-91D8-81EE90078F6D",
+      "kind" : "normallyOpen",
+      "label" : "M0",
+      "position" : {
+        "column" : 1,
+        "row" : 5
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "F37156B8-6DBA-4497-8E5B-CDB58591AE14",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 2,
+        "row" : 5
+      }
+    },
+    {
+      "comment" : "青時間内",
+      "id" : "79C6895A-4CC7-498B-884E-622204AC0CCB",
+      "kind" : "normallyClosed",
+      "label" : "T0",
+      "position" : {
+        "column" : 3,
+        "row" : 5
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "A83991C1-C6ED-4595-BDCC-79941666A405",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 4,
+        "row" : 5
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "3986DF02-2D06-4CA7-98E8-EA80638BF42E",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 5,
+        "row" : 5
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "BD445E16-8E40-4A4D-B36E-97A64FEEE840",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 6,
+        "row" : 5
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "80399F4A-66D6-4960-9C48-97C1A1323093",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 7,
+        "row" : 5
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "CBB37796-A3B5-4D20-842B-73120ECDDFDF",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 8,
+        "row" : 5
+      }
+    },
+    {
+      "comment" : "青ランプ（10秒）",
+      "id" : "C860206E-D468-4FF8-8704-3C44A1C5A32E",
+      "kind" : "coil",
+      "label" : "Y0",
+      "position" : {
+        "column" : 9,
+        "row" : 5
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "0F671395-2493-409D-814B-9C96ED43841E",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 0,
+        "row" : 6
+      }
+    },
+    {
+      "comment" : "運転中",
+      "id" : "6F096D36-A824-49FB-A985-8D1A8731BA53",
+      "kind" : "normallyOpen",
+      "label" : "M0",
+      "position" : {
+        "column" : 1,
+        "row" : 6
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "5C40A53F-5C80-4512-8A38-6B3DBC029AA3",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 2,
+        "row" : 6
+      }
+    },
+    {
+      "comment" : "青完了",
+      "id" : "83767C58-2944-427E-A516-13FFD5534985",
+      "kind" : "normallyOpen",
+      "label" : "T0",
+      "position" : {
+        "column" : 3,
+        "row" : 6
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "7E0F88DD-730B-4290-B636-0252E6CF0A86",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 4,
+        "row" : 6
+      }
+    },
+    {
+      "comment" : "黄時間内",
+      "id" : "CA1F47A4-B5C9-4FB5-A1FC-2ED1A94E26BF",
+      "kind" : "normallyClosed",
+      "label" : "T1",
+      "position" : {
+        "column" : 5,
+        "row" : 6
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "1871A57B-819E-45F6-AFDE-C539B4A6CF32",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 6,
+        "row" : 6
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "2202E7B7-BB9D-4C21-9162-368AE134A695",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 7,
+        "row" : 6
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "CA120A70-F0E5-4283-824B-A900E04D0252",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 8,
+        "row" : 6
+      }
+    },
+    {
+      "comment" : "黄ランプ（2秒）",
+      "id" : "E8CDA0E5-45E9-4C73-BDBA-9C6DEDA0FC8A",
+      "kind" : "coil",
+      "label" : "Y1",
+      "position" : {
+        "column" : 9,
+        "row" : 6
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "A6230A3A-40A4-4998-A12F-A625E6741577",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 0,
+        "row" : 7
+      }
+    },
+    {
+      "comment" : "運転中",
+      "id" : "318D74D4-E7F3-449A-8F0F-BA59E7530EE4",
+      "kind" : "normallyOpen",
+      "label" : "M0",
+      "position" : {
+        "column" : 1,
+        "row" : 7
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "3158CE18-1C48-4654-94D0-806FF5B2F6F5",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 2,
+        "row" : 7
+      }
+    },
+    {
+      "comment" : "黄完了",
+      "id" : "A26BEADF-9F10-4F8E-9951-6445E6B2BFF2",
+      "kind" : "normallyOpen",
+      "label" : "T1",
+      "position" : {
+        "column" : 3,
+        "row" : 7
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "864EFE1A-666B-4A59-B03C-0F65F3F4A399",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 4,
+        "row" : 7
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "57C69472-2E7A-4E46-B9F8-A1192FF9211F",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 5,
+        "row" : 7
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "C409ADD6-1710-4E9D-921E-8B78E179CBC8",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 6,
+        "row" : 7
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "CCDDAF4D-FED7-420D-ADEF-662B32E03A8A",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 7,
+        "row" : 7
+      }
+    },
+    {
+      "comment" : "",
+      "id" : "340AC1FD-C1DD-4FE4-AC68-1D3AEE946979",
+      "kind" : "horizontalWire",
+      "label" : "",
+      "position" : {
+        "column" : 8,
+        "row" : 7
+      }
+    },
+    {
+      "comment" : "赤ランプ（5秒）",
+      "id" : "4DF0631E-7ED1-4ABB-A4ED-13B4049DB6D7",
+      "kind" : "coil",
+      "label" : "Y2",
+      "position" : {
+        "column" : 9,
+        "row" : 7
+      }
+    }
+  ],
+  "name" : "練習問題10 信号機",
+  "rows" : 8,
+  "version" : 2
+}

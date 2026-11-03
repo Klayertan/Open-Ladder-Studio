@@ -1,0 +1,733 @@
+// !$*UTF8*$!
+{
+	"archiveVersion" = 1;
+	"classes" = {
+
+	};
+	"objectVersion" = 56;
+	"objects" = {
+		"1B736D74DCC52D0FDBC4A28B" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/LadderCore/Circuit.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"2CD6BAF81A5F92E3FC0FED6B" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/LadderCore/CircuitEditing.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"12F1A077D6D45D6E4FAA3848" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/LadderCore/CircuitValidation.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"7A1729224D233A08980F801A" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/LadderCore/ExampleCircuits.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"062D83C288996BEDA8AAE6D2" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/LadderCore/LadderSimulator.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"653E8DFE32F0129D46427084" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/LadderCore/RenriMBSExporter.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"E055842F06DCDB7F0F21768F" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/OpenLadderStudio/EditorViewModel.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"7C93D6BADDC3BFDE83C000E8" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/OpenLadderStudio/LadderDocument.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"8D7C8F3B5E72A1C5201803D1" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/OpenLadderStudio/OpenLadderStudioApp.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"080033B1ED4EC2A2F3F8D36E" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/OpenLadderStudio/Rendering/DiagramExporter.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"42D7F6433E8757488CE6FF19" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/OpenLadderStudio/Rendering/DiagramRenderer.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"1E3AAA76864B859BDF563EC2" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/OpenLadderStudio/Views/ComponentSidebar.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"AB75ACB32BADE67029E78CDC" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/OpenLadderStudio/Views/EditorView.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"BF96F40F2797938A71545863" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/OpenLadderStudio/Views/InspectorView.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"F8FADCADEE974977A8120171" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/OpenLadderStudio/Views/LadderCanvasView.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"2246371C7D15DB032543A600" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/OpenLadderStudio/Views/SimulationPanel.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"6B5A64F621B7BAC7FF95C9B6" = {
+			"isa" = "PBXFileReference";
+			"path" = "Tests/LadderCoreTests/CircuitEditingTests.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"6C0DF634B6FA5B7F4BE104A3" = {
+			"isa" = "PBXFileReference";
+			"path" = "Tests/LadderCoreTests/LadderSimulationTests.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"4CEF25D3052CEC6E3BC41C6E" = {
+			"isa" = "PBXFileReference";
+			"path" = "Tests/LadderCoreTests/RenriMBSExportTests.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"9E73FB1C4C6A44D672D814E3" = {
+			"isa" = "PBXFileReference";
+			"path" = "Tests/LadderAppTests/EditorIntegrationTests.swift";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "sourcecode.swift";
+		};
+		"797E92F9BC7CD81F430FA27D" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.framework";
+			"path" = "LadderCore.framework";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"B6CDB6E5D160E013280D3C68" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.application";
+			"path" = "Open Ladder Studio.app";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"E02A90D9643568EA39115CFB" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.cfbundle";
+			"path" = "LadderCoreTests.xctest";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"186E03F1D19DB8488A623AF5" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.cfbundle";
+			"path" = "LadderAppTests.xctest";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"913AA4A2621B719617BB93D5" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.strings";
+			"name" = "en";
+			"path" = "Sources/OpenLadderStudio/Resources/en.lproj/Localizable.strings";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"C6AE8C0A66ABAFD6AFEDF99A" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "text.plist.strings";
+			"name" = "ja";
+			"path" = "Sources/OpenLadderStudio/Resources/ja.lproj/Localizable.strings";
+			"sourceTree" = "SOURCE_ROOT";
+		};
+		"8B722B7668EF2D7C765876A2" = {
+			"isa" = "PBXVariantGroup";
+			"children" = ( "913AA4A2621B719617BB93D5", "C6AE8C0A66ABAFD6AFEDF99A" );
+			"name" = "Localizable.strings";
+			"sourceTree" = "<group>";
+		};
+		"CB4DA59AC6585BBB437296BC" = {
+			"isa" = "PBXFileReference";
+			"path" = "Examples";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "folder";
+		};
+		"077048555CCFB5379FD95288" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/OpenLadderStudio/Resources/AppIcon.icns";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "image.icns";
+		};
+		"2B746BA2B9B3915911CB8D34" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/OpenLadderStudio/Info.plist";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "text.plist.xml";
+		};
+		"881711C23AB75BA3DC23AA19" = {
+			"isa" = "PBXFileReference";
+			"path" = "Sources/OpenLadderStudio/OpenLadderStudio.entitlements";
+			"sourceTree" = "SOURCE_ROOT";
+			"lastKnownFileType" = "text.plist.entitlements";
+		};
+		"C13D175D52AC1903FF23364E" = {
+			"isa" = "PBXGroup";
+			"children" = ( "1B736D74DCC52D0FDBC4A28B", "2CD6BAF81A5F92E3FC0FED6B", "12F1A077D6D45D6E4FAA3848", "7A1729224D233A08980F801A", "062D83C288996BEDA8AAE6D2", "653E8DFE32F0129D46427084" );
+			"name" = "LadderCore";
+			"sourceTree" = "<group>";
+		};
+		"8591E0CA4EFC35552449AB7A" = {
+			"isa" = "PBXGroup";
+			"children" = ( "E055842F06DCDB7F0F21768F", "7C93D6BADDC3BFDE83C000E8", "8D7C8F3B5E72A1C5201803D1", "080033B1ED4EC2A2F3F8D36E", "42D7F6433E8757488CE6FF19", "1E3AAA76864B859BDF563EC2", "AB75ACB32BADE67029E78CDC", "BF96F40F2797938A71545863", "F8FADCADEE974977A8120171", "2246371C7D15DB032543A600", "2B746BA2B9B3915911CB8D34", "881711C23AB75BA3DC23AA19" );
+			"name" = "OpenLadderStudio";
+			"sourceTree" = "<group>";
+		};
+		"156052F04525D0F710673CF0" = {
+			"isa" = "PBXGroup";
+			"children" = ( "6B5A64F621B7BAC7FF95C9B6", "6C0DF634B6FA5B7F4BE104A3", "4CEF25D3052CEC6E3BC41C6E", "9E73FB1C4C6A44D672D814E3" );
+			"name" = "Tests";
+			"sourceTree" = "<group>";
+		};
+		"A024F06580C79B7582C3806A" = {
+			"isa" = "PBXGroup";
+			"children" = ( "8B722B7668EF2D7C765876A2", "CB4DA59AC6585BBB437296BC", "077048555CCFB5379FD95288" );
+			"name" = "Resources";
+			"sourceTree" = "<group>";
+		};
+		"5151B46607EBC8890D8DFCC2" = {
+			"isa" = "PBXGroup";
+			"children" = ( "797E92F9BC7CD81F430FA27D", "B6CDB6E5D160E013280D3C68", "E02A90D9643568EA39115CFB", "186E03F1D19DB8488A623AF5" );
+			"name" = "Products";
+			"sourceTree" = "<group>";
+		};
+		"E50290A24C49A459B43487C5" = {
+			"isa" = "PBXGroup";
+			"children" = ( "C13D175D52AC1903FF23364E", "8591E0CA4EFC35552449AB7A", "156052F04525D0F710673CF0", "A024F06580C79B7582C3806A", "5151B46607EBC8890D8DFCC2" );
+			"sourceTree" = "<group>";
+		};
+		"89E1FD6268CC0F221A2BE178" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"MACOSX_DEPLOYMENT_TARGET" = "14.0";
+				"SDKROOT" = "macosx";
+				"SWIFT_VERSION" = "6.0";
+				"CLANG_ENABLE_MODULES" = "YES";
+				"SWIFT_STRICT_CONCURRENCY" = "complete";
+				"ARCHS" = "arm64";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"GCC_C_LANGUAGE_STANDARD" = "gnu17";
+				"CLANG_ENABLE_OBJC_ARC" = "YES";
+				"SWIFT_EMIT_LOC_STRINGS" = "NO";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG";
+				"GCC_PREPROCESSOR_DEFINITIONS" = ( "DEBUG=1", "$(inherited)" );
+			};
+			"name" = "Debug";
+		};
+		"E6DE6C99132752C914FEF632" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"MACOSX_DEPLOYMENT_TARGET" = "14.0";
+				"SDKROOT" = "macosx";
+				"SWIFT_VERSION" = "6.0";
+				"CLANG_ENABLE_MODULES" = "YES";
+				"SWIFT_STRICT_CONCURRENCY" = "complete";
+				"ARCHS" = "arm64";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"GCC_C_LANGUAGE_STANDARD" = "gnu17";
+				"CLANG_ENABLE_OBJC_ARC" = "YES";
+				"SWIFT_EMIT_LOC_STRINGS" = "NO";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+			};
+			"name" = "Release";
+		};
+		"F8C70E4123C9AE82C42562CC" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = ( "89E1FD6268CC0F221A2BE178", "E6DE6C99132752C914FEF632" );
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"AA72B429272FCD4342DB66D1" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "1B736D74DCC52D0FDBC4A28B";
+		};
+		"9BD31B36BFBE7FD57FD69986" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "2CD6BAF81A5F92E3FC0FED6B";
+		};
+		"F2BCB6ACF130833A46980149" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "12F1A077D6D45D6E4FAA3848";
+		};
+		"1FF45A9DC4D0105305784D4F" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "7A1729224D233A08980F801A";
+		};
+		"033E16DF7D04E1C8E8B4DAD5" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "062D83C288996BEDA8AAE6D2";
+		};
+		"C50BD834CC9BE129AC405C85" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "653E8DFE32F0129D46427084";
+		};
+		"BAAA43A2A0BF95B3DDDC3619" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = ( "AA72B429272FCD4342DB66D1", "9BD31B36BFBE7FD57FD69986", "F2BCB6ACF130833A46980149", "1FF45A9DC4D0105305784D4F", "033E16DF7D04E1C8E8B4DAD5", "C50BD834CC9BE129AC405C85" );
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"4B635DD2614CC383D321F8B2" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (  );
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"5A485B880CD57FB1A6A04211" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "LadderCore";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "studio.openladder.core";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"LD_RUNPATH_SEARCH_PATHS" = ( "$(inherited)", "@executable_path/../Frameworks", "@loader_path/../Frameworks" );
+				"DEFINES_MODULE" = "YES";
+				"SKIP_INSTALL" = "YES";
+				"DYLIB_INSTALL_NAME_BASE" = "@rpath";
+				"INSTALL_PATH" = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG";
+				"GCC_PREPROCESSOR_DEFINITIONS" = ( "DEBUG=1", "$(inherited)" );
+			};
+			"name" = "Debug";
+		};
+		"1BD3EC2284E1D1EAACF8A62F" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "LadderCore";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "studio.openladder.core";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"LD_RUNPATH_SEARCH_PATHS" = ( "$(inherited)", "@executable_path/../Frameworks", "@loader_path/../Frameworks" );
+				"DEFINES_MODULE" = "YES";
+				"SKIP_INSTALL" = "YES";
+				"DYLIB_INSTALL_NAME_BASE" = "@rpath";
+				"INSTALL_PATH" = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+			};
+			"name" = "Release";
+		};
+		"E20CBBCDE7454CD5BF1115F2" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = ( "5A485B880CD57FB1A6A04211", "1BD3EC2284E1D1EAACF8A62F" );
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"F11EED822EBD4996DAF631B0" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "E20CBBCDE7454CD5BF1115F2";
+			"buildPhases" = ( "BAAA43A2A0BF95B3DDDC3619", "4B635DD2614CC383D321F8B2" );
+			"buildRules" = (  );
+			"dependencies" = (  );
+			"name" = "LadderCore";
+			"productName" = "LadderCore";
+			"productReference" = "797E92F9BC7CD81F430FA27D";
+			"productType" = "com.apple.product-type.framework";
+		};
+		"478F793273FDF4527953C818" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "E055842F06DCDB7F0F21768F";
+		};
+		"C459AC46A103FDA81DEFB4B9" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "7C93D6BADDC3BFDE83C000E8";
+		};
+		"3B8F47EE77922A2D75386CE0" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "8D7C8F3B5E72A1C5201803D1";
+		};
+		"E9629615B29D04B4741CD033" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "080033B1ED4EC2A2F3F8D36E";
+		};
+		"E179204B8414AE3C2BB17FD4" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "42D7F6433E8757488CE6FF19";
+		};
+		"6FB837196235AFE2AD5D5044" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "1E3AAA76864B859BDF563EC2";
+		};
+		"757DF61C2B3853B2BD56D024" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "AB75ACB32BADE67029E78CDC";
+		};
+		"44D05C3B5BFFFB530A18AA65" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "BF96F40F2797938A71545863";
+		};
+		"147596C1BEF5DCB17F6274B8" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "F8FADCADEE974977A8120171";
+		};
+		"4F62F671E20392499957E431" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "2246371C7D15DB032543A600";
+		};
+		"D10ECEDA0FB53BA093BEC557" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = ( "478F793273FDF4527953C818", "C459AC46A103FDA81DEFB4B9", "3B8F47EE77922A2D75386CE0", "E9629615B29D04B4741CD033", "E179204B8414AE3C2BB17FD4", "6FB837196235AFE2AD5D5044", "757DF61C2B3853B2BD56D024", "44D05C3B5BFFFB530A18AA65", "147596C1BEF5DCB17F6274B8", "4F62F671E20392499957E431" );
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"EC33812B7B7C827AE365DC69" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "797E92F9BC7CD81F430FA27D";
+		};
+		"C19A4328C9961E8F8A7CF4CD" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = ( "EC33812B7B7C827AE365DC69" );
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"8D12A539B89425732DE1CF2E" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "8B722B7668EF2D7C765876A2";
+		};
+		"B784C090913268ABCD4A9DDC" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "CB4DA59AC6585BBB437296BC";
+		};
+		"3E41213B6641FED129CA8944" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "077048555CCFB5379FD95288";
+		};
+		"C84B5C31679C986BFD935BC6" = {
+			"isa" = "PBXResourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = ( "8D12A539B89425732DE1CF2E", "B784C090913268ABCD4A9DDC", "3E41213B6641FED129CA8944" );
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"8BDCA00D508E5D5F0EEB3651" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "797E92F9BC7CD81F430FA27D";
+			"settings" = {
+				"ATTRIBUTES" = ( "CodeSignOnCopy", "RemoveHeadersOnCopy" );
+			};
+		};
+		"CFFF27C96089B93150F3553B" = {
+			"isa" = "PBXCopyFilesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"dstPath" = "";
+			"dstSubfolderSpec" = 10;
+			"files" = ( "8BDCA00D508E5D5F0EEB3651" );
+			"name" = "Embed Frameworks";
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"856A92FE81722DD349523165" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "98F54143AB4E86B28C3AFEE0";
+			"proxyType" = 1;
+			"remoteGlobalIDString" = "F11EED822EBD4996DAF631B0";
+			"remoteInfo" = "core";
+		};
+		"C1AED9A0F807A6FD262F7F6D" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "F11EED822EBD4996DAF631B0";
+			"targetProxy" = "856A92FE81722DD349523165";
+		};
+		"E9B2E96ABC5F6856F2BE79CF" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "Open Ladder Studio";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "studio.openladder.app";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"LD_RUNPATH_SEARCH_PATHS" = ( "$(inherited)", "@executable_path/../Frameworks", "@loader_path/../Frameworks" );
+				"PRODUCT_MODULE_NAME" = "OpenLadderStudio";
+				"INFOPLIST_FILE" = "Sources/OpenLadderStudio/Info.plist";
+				"CODE_SIGN_ENTITLEMENTS" = "Sources/OpenLadderStudio/OpenLadderStudio.entitlements";
+				"ENABLE_HARDENED_RUNTIME" = "YES";
+				"ENABLE_APP_SANDBOX" = "YES";
+				"COMBINE_HIDPI_IMAGES" = "YES";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG";
+				"GCC_PREPROCESSOR_DEFINITIONS" = ( "DEBUG=1", "$(inherited)" );
+			};
+			"name" = "Debug";
+		};
+		"5A8C91857F674E16E2724F47" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "Open Ladder Studio";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "studio.openladder.app";
+				"GENERATE_INFOPLIST_FILE" = "NO";
+				"LD_RUNPATH_SEARCH_PATHS" = ( "$(inherited)", "@executable_path/../Frameworks", "@loader_path/../Frameworks" );
+				"PRODUCT_MODULE_NAME" = "OpenLadderStudio";
+				"INFOPLIST_FILE" = "Sources/OpenLadderStudio/Info.plist";
+				"CODE_SIGN_ENTITLEMENTS" = "Sources/OpenLadderStudio/OpenLadderStudio.entitlements";
+				"ENABLE_HARDENED_RUNTIME" = "YES";
+				"ENABLE_APP_SANDBOX" = "YES";
+				"COMBINE_HIDPI_IMAGES" = "YES";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+			};
+			"name" = "Release";
+		};
+		"DA1189605F4160DBE5714E93" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = ( "E9B2E96ABC5F6856F2BE79CF", "5A8C91857F674E16E2724F47" );
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"29C7B681C8D62CBAC94D51C0" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "DA1189605F4160DBE5714E93";
+			"buildPhases" = ( "D10ECEDA0FB53BA093BEC557", "C19A4328C9961E8F8A7CF4CD", "C84B5C31679C986BFD935BC6", "CFFF27C96089B93150F3553B" );
+			"buildRules" = (  );
+			"dependencies" = ( "C1AED9A0F807A6FD262F7F6D" );
+			"name" = "OpenLadderStudio";
+			"productName" = "OpenLadderStudio";
+			"productReference" = "B6CDB6E5D160E013280D3C68";
+			"productType" = "com.apple.product-type.application";
+		};
+		"7DE19B9E3F9A211040CCDD80" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "6B5A64F621B7BAC7FF95C9B6";
+		};
+		"0BFEFB20C68C3E609551B87D" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "6C0DF634B6FA5B7F4BE104A3";
+		};
+		"2F1FCFFFCF33CA5F869CB03A" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "4CEF25D3052CEC6E3BC41C6E";
+		};
+		"FE3769782B7F5220F0E0D205" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = ( "7DE19B9E3F9A211040CCDD80", "0BFEFB20C68C3E609551B87D", "2F1FCFFFCF33CA5F869CB03A" );
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"15424463208DCCFAC198D29F" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "797E92F9BC7CD81F430FA27D";
+		};
+		"0F194C20A28A320F4CB82888" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = ( "15424463208DCCFAC198D29F" );
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"CE6D1F28E84F31422F83BDAC" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "98F54143AB4E86B28C3AFEE0";
+			"proxyType" = 1;
+			"remoteGlobalIDString" = "F11EED822EBD4996DAF631B0";
+			"remoteInfo" = "core";
+		};
+		"B899A8542AD9EE8AAA14A015" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "F11EED822EBD4996DAF631B0";
+			"targetProxy" = "CE6D1F28E84F31422F83BDAC";
+		};
+		"0F3D67935A4F199E058A017A" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "LadderCoreTests";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "studio.openladder.tests";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"LD_RUNPATH_SEARCH_PATHS" = ( "$(inherited)", "@executable_path/../Frameworks", "@loader_path/../Frameworks" );
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG";
+				"GCC_PREPROCESSOR_DEFINITIONS" = ( "DEBUG=1", "$(inherited)" );
+			};
+			"name" = "Debug";
+		};
+		"20B70E15FDC36C625E57F658" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "LadderCoreTests";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "studio.openladder.tests";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"LD_RUNPATH_SEARCH_PATHS" = ( "$(inherited)", "@executable_path/../Frameworks", "@loader_path/../Frameworks" );
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+			};
+			"name" = "Release";
+		};
+		"12B527EF3EF9C4DD757429EA" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = ( "0F3D67935A4F199E058A017A", "20B70E15FDC36C625E57F658" );
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"7EC8F98B7A265120217712DE" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "12B527EF3EF9C4DD757429EA";
+			"buildPhases" = ( "FE3769782B7F5220F0E0D205", "0F194C20A28A320F4CB82888" );
+			"buildRules" = (  );
+			"dependencies" = ( "B899A8542AD9EE8AAA14A015" );
+			"name" = "LadderCoreTests";
+			"productName" = "LadderCoreTests";
+			"productReference" = "E02A90D9643568EA39115CFB";
+			"productType" = "com.apple.product-type.bundle.unit-test";
+		};
+		"EFF7261CB79ADA1FE5914AE7" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "9E73FB1C4C6A44D672D814E3";
+		};
+		"8521DDB727EC65AEEA3EAF38" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = ( "EFF7261CB79ADA1FE5914AE7" );
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"58E0E510D9C71E033E0F36D1" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "797E92F9BC7CD81F430FA27D";
+		};
+		"8F0DB788784A9FCDD7F0809C" = {
+			"isa" = "PBXFrameworksBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = ( "58E0E510D9C71E033E0F36D1" );
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"D9BC978AA7942D47467BFCC1" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "98F54143AB4E86B28C3AFEE0";
+			"proxyType" = 1;
+			"remoteGlobalIDString" = "F11EED822EBD4996DAF631B0";
+			"remoteInfo" = "core";
+		};
+		"82712CADE5E02ECC95D76565" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "F11EED822EBD4996DAF631B0";
+			"targetProxy" = "D9BC978AA7942D47467BFCC1";
+		};
+		"64CB02D994529B0837A3BE7A" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "98F54143AB4E86B28C3AFEE0";
+			"proxyType" = 1;
+			"remoteGlobalIDString" = "29C7B681C8D62CBAC94D51C0";
+			"remoteInfo" = "app";
+		};
+		"7F254A59719C303DD2C34D44" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "29C7B681C8D62CBAC94D51C0";
+			"targetProxy" = "64CB02D994529B0837A3BE7A";
+		};
+		"BFD96C922C4047855F57CF2B" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "LadderAppTests";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "studio.openladder.apptests";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"LD_RUNPATH_SEARCH_PATHS" = ( "$(inherited)", "@executable_path/../Frameworks", "@loader_path/../Frameworks" );
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/Open Ladder Studio.app/Contents/MacOS/Open Ladder Studio";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-Onone";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf";
+				"ENABLE_TESTABILITY" = "YES";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS" = "DEBUG";
+				"GCC_PREPROCESSOR_DEFINITIONS" = ( "DEBUG=1", "$(inherited)" );
+			};
+			"name" = "Debug";
+		};
+		"5DEC394B40FE0F8B2FA3952E" = {
+			"isa" = "XCBuildConfiguration";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "LadderAppTests";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "studio.openladder.apptests";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"LD_RUNPATH_SEARCH_PATHS" = ( "$(inherited)", "@executable_path/../Frameworks", "@loader_path/../Frameworks" );
+				"TEST_HOST" = "$(BUILT_PRODUCTS_DIR)/Open Ladder Studio.app/Contents/MacOS/Open Ladder Studio";
+				"BUNDLE_LOADER" = "$(TEST_HOST)";
+				"SWIFT_OPTIMIZATION_LEVEL" = "-O";
+				"DEBUG_INFORMATION_FORMAT" = "dwarf-with-dsym";
+			};
+			"name" = "Release";
+		};
+		"F3BE74B9EAE68499CE8D3141" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = ( "BFD96C922C4047855F57CF2B", "5DEC394B40FE0F8B2FA3952E" );
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Release";
+		};
+		"766289BB4CD0FD217E12F2DC" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "F3BE74B9EAE68499CE8D3141";
+			"buildPhases" = ( "8521DDB727EC65AEEA3EAF38", "8F0DB788784A9FCDD7F0809C" );
+			"buildRules" = (  );
+			"dependencies" = ( "82712CADE5E02ECC95D76565", "7F254A59719C303DD2C34D44" );
+			"name" = "LadderAppTests";
+			"productName" = "LadderAppTests";
+			"productReference" = "186E03F1D19DB8488A623AF5";
+			"productType" = "com.apple.product-type.bundle.unit-test";
+		};
+		"98F54143AB4E86B28C3AFEE0" = {
+			"isa" = "PBXProject";
+			"attributes" = {
+				"BuildIndependentTargetsInParallel" = "YES";
+				"LastSwiftUpdateCheck" = "1600";
+				"LastUpgradeCheck" = "1600";
+				"TargetAttributes" = {
+					"F11EED822EBD4996DAF631B0" = {
+						"CreatedOnToolsVersion" = "16.0";
+					};
+					"29C7B681C8D62CBAC94D51C0" = {
+						"CreatedOnToolsVersion" = "16.0";
+					};
+					"7EC8F98B7A265120217712DE" = {
+						"CreatedOnToolsVersion" = "16.0";
+					};
+					"766289BB4CD0FD217E12F2DC" = {
+						"CreatedOnToolsVersion" = "16.0";
+					};
+				};
+			};
+			"buildConfigurationList" = "F8C70E4123C9AE82C42562CC";
+			"compatibilityVersion" = "Xcode 14.0";
+			"developmentRegion" = "en";
+			"hasScannedForEncodings" = 0;
+			"knownRegions" = ( "en", "ja", "Base" );
+			"mainGroup" = "E50290A24C49A459B43487C5";
+			"productRefGroup" = "5151B46607EBC8890D8DFCC2";
+			"projectDirPath" = "";
+			"projectRoot" = "";
+			"targets" = ( "29C7B681C8D62CBAC94D51C0", "F11EED822EBD4996DAF631B0", "7EC8F98B7A265120217712DE", "766289BB4CD0FD217E12F2DC" );
+		};
+	};
+	"rootObject" = "98F54143AB4E86B28C3AFEE0";
+}
