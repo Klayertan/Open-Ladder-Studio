@@ -1,5 +1,6 @@
 "action.branch" = "Add Parallel Branch";
 "action.delete" = "Delete Elements";
+"action.device" = "Edit Device";
 "action.example" = "Replace Circuit";
 "action.move" = "Move Elements";
 "action.paste" = "Paste Elements";
@@ -13,6 +14,9 @@
 "canvas.panHint" = "H + drag to pan · pinch to zoom";
 "common.cancel" = "Cancel";
 "common.ok" = "OK";
+"devices.cancel" = "Cancel";
+"devices.empty" = "No devices yet.";
+"devices.title" = "DEVICES";
 "edit.copy" = "Copy";
 "edit.cut" = "Cut";
 "edit.delete" = "Delete";
@@ -53,12 +57,17 @@
 "inspector.columns" = "Columns";
 "inspector.comment" = "COMMENT";
 "inspector.commentPlaceholder" = "Add a note…";
+"inspector.deviceComment" = "DEVICE COMMENT";
+"inspector.deviceCommentHint" = "Shared by every symbol with this label.";
 "inspector.futureHint" = "Version 0.2 - Editing, timers and educational simulation. Renri .mbs support remains unverified.";
 "inspector.grid" = "Show grid";
 "inspector.label" = "DEVICE LABEL";
+"inspector.lampColor" = "Lamp color";
 "inspector.multiple" = "Multiple elements selected";
 "inspector.nativeFormat" = "Native .ladder / JSON";
 "inspector.noSelection" = "No element selected";
+"inspector.note" = "NOTE ON THIS SYMBOL";
+"inspector.notePlaceholder" = "Optional — replaces the device comment here";
 "inspector.project" = "PROJECT";
 "inspector.projectName" = "Circuit name";
 "inspector.rename" = "Rename";
@@ -70,6 +79,12 @@
 "inspector.timerSeconds" = "TIMER PRESET (SECONDS)";
 "inspector.title" = "Inspector";
 "inspector.toggle" = "Toggle inspector";
+"lamp.blue" = "Blue";
+"lamp.green" = "Green";
+"lamp.none" = "Default";
+"lamp.red" = "Red";
+"lamp.white" = "White";
+"lamp.yellow" = "Yellow";
 "menu.circuit" = "Circuit";
 "project.untitled" = "Untitled circuit";
 "renri.error.device" = "MBS export supports numbered X/Y/M/T contacts, M/Y coils, and T timers.";

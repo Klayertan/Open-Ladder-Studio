@@ -45,7 +45,7 @@ public enum RenriMBSExporter {
             guard (1...9).contains(contacts.count), contacts.allSatisfy({ $0.kind == .normallyOpen || $0.kind == .normallyClosed }) else { throw RenriExportError.unsupportedLayout }
             let verticals = circuit.elements.filter { $0.kind == .verticalWire && $0.position.row == output.position.row }
             if verticals.isEmpty {
-                rows.append(try series(contacts: contacts, output: output))
+                rows.append(try series(contacts: contacts, output: output, in: circuit))
             } else {
                 guard output.kind == .coil, output.label.hasPrefix("M"), contacts.count == 2, verticals.count == 2 else { throw RenriExportError.unsupportedLayout }
                 let nodes = verticals.map { $0.position.column }.sorted()
@@ -55,14 +55,14 @@ public enum RenriMBSExporter {
                 let lower = circuit.elements.filter { $0.position.row == output.position.row + 1 && $0.kind != .verticalWire }
                 guard lower.count == 1, let hold = lower.first, hold.kind == .normallyOpen,
                       hold.position.column == top.position.column, hold.label == output.label else { throw RenriExportError.unsupportedLayout }
-                var main = try series(contacts: [top, stop], output: output)
+                var main = try series(contacts: [top, stop], output: output, in: circuit)
                 // Exact two-contact branch topology from official sample/sample1.mbs.
                 main.layout[0] = 0x0008805A
                 main.layout[1] = 0x00088068
                 rows.append(main)
                 var branch = emptyRow()
                 branch.layout[0] = 0x0000801A; branch.layout[1] = 0x00000002
-                branch.data[0] = try device(hold.label); branch.comments[0] = hold.comment
+                branch.data[0] = try device(hold.label); branch.comments[0] = circuit.displayComment(for: hold)
                 rows.append(branch)
                 consumed.formUnion(lower.map(\.id))
                 consumed.formUnion(verticals.map(\.id))
@@ -108,15 +108,15 @@ public enum RenriMBSExporter {
         }
         return prefix | number
     }
-    private static func series(contacts: [LadderElement], output: LadderElement) throws -> Row {
+    private static func series(contacts: [LadderElement], output: LadderElement, in circuit: Circuit) throws -> Row {
         var row = emptyRow()
         for (column, contact) in contacts.enumerated() {
             row.layout[column] = (contact.kind == .normallyOpen ? 0x00008010 : 0x00008020) | (column == 0 ? 0xA : 0x8)
-            row.data[column] = try device(contact.label); row.comments[column] = contact.comment
+            row.data[column] = try device(contact.label); row.comments[column] = circuit.displayComment(for: contact)
         }
         let wireEnd = output.kind == .timer ? 10 : 11
         for i in contacts.count..<wireEnd { row.layout[i] = 0x000000B9 }
-        row.data[11] = try device(output.label); row.comments[11] = output.comment
+        row.data[11] = try device(output.label); row.comments[11] = circuit.displayComment(for: output)
         if output.kind == .timer {
             guard output.label.hasPrefix("T"), output.presetMilliseconds % 100 == 0,
                   (1...9_999).contains(output.presetMilliseconds / 100) else { throw RenriExportError.unsupportedTimer }

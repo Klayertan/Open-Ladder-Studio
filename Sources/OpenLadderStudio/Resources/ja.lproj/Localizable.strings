@@ -1,5 +1,6 @@
 "action.branch" = "並列分岐を追加";
 "action.delete" = "要素を削除";
+"action.device" = "デバイスを編集";
 "action.example" = "回路を置き換え";
 "action.move" = "要素を移動";
 "action.paste" = "要素をペースト";
@@ -13,6 +14,9 @@
 "canvas.panHint" = "Hでドラッグ移動・ピンチで拡大縮小";
 "common.cancel" = "キャンセル";
 "common.ok" = "OK";
+"devices.cancel" = "キャンセル";
+"devices.empty" = "デバイスはまだありません。";
+"devices.title" = "デバイス一覧";
 "edit.copy" = "コピー";
 "edit.cut" = "カット";
 "edit.delete" = "削除";
@@ -53,12 +57,17 @@
 "inspector.columns" = "列数";
 "inspector.comment" = "コメント";
 "inspector.commentPlaceholder" = "メモを入力…";
+"inspector.deviceComment" = "デバイスコメント";
+"inspector.deviceCommentHint" = "同じラベルのすべての記号で共有されます。";
 "inspector.futureHint" = "バージョン0.2：編集・タイマ・教育用シミュレーション。Renri .mbs互換性は未検証です。";
 "inspector.grid" = "グリッドを表示";
 "inspector.label" = "デバイスラベル";
+"inspector.lampColor" = "ランプ色";
 "inspector.multiple" = "複数の要素を選択中";
 "inspector.nativeFormat" = "ネイティブ .ladder / JSON";
 "inspector.noSelection" = "要素が選択されていません";
+"inspector.note" = "この記号のメモ";
+"inspector.notePlaceholder" = "任意 — ここだけデバイスコメントの代わりに表示";
 "inspector.project" = "プロジェクト";
 "inspector.projectName" = "回路名";
 "inspector.rename" = "名前を変更";
@@ -70,6 +79,12 @@
 "inspector.timerSeconds" = "タイマ設定値（秒）";
 "inspector.title" = "インスペクタ";
 "inspector.toggle" = "インスペクタを表示／非表示";
+"lamp.blue" = "青";
+"lamp.green" = "緑";
+"lamp.none" = "標準";
+"lamp.red" = "赤";
+"lamp.white" = "白";
+"lamp.yellow" = "黄";
 "menu.circuit" = "回路";
 "project.untitled" = "名称未設定の回路";
 "renri.error.device" = "MBS書き出しはX/Y/M/T接点、M/Yコイル、Tタイマに対応します。";

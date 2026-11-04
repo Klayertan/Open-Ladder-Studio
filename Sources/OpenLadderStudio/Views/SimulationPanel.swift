@@ -8,14 +8,8 @@ struct SimulationPanel: View {
     private var inputs: [String] { Array(Set(document.circuit.elements.map(\.label).filter { $0.hasPrefix("X") })).sorted() }
     private var outputs: [String] { Array(Set(document.circuit.elements.filter { $0.kind.isOutput && $0.label.hasPrefix("Y") }.map(\.label))).sorted() }
     private var timers: [String] { (model.simulation?.timers.keys.map { $0 } ?? []).sorted() }
-    private func comment(_ address: String) -> String { document.circuit.elements.first { $0.label == address }?.comment ?? "" }
-    private func lampColor(_ address: String) -> Color {
-        let note = comment(address).lowercased()
-        if note.contains("青") || note.contains("green") { return .green }
-        if note.contains("黄") || note.contains("yellow") { return .yellow }
-        if note.contains("赤") || note.contains("red") { return .red }
-        return DiagramRenderer.accent
-    }
+    private func comment(_ address: String) -> String { document.circuit.device(address).comment }
+    private func lampColor(_ address: String) -> Color { document.circuit.device(address).lampColor?.color ?? DiagramRenderer.accent }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 13) {
@@ -80,5 +74,17 @@ struct SimulationPanel: View {
         }
         .padding(.horizontal, 18).padding(.vertical, 12).background(.bar)
         .onAppear { _ = model.prepareSimulation() }
+    }
+}
+
+extension LampColor {
+    var color: Color {
+        switch self {
+        case .green: .green
+        case .yellow: .yellow
+        case .red: .red
+        case .blue: .blue
+        case .white: Color(white: 0.85)
+        }
     }
 }

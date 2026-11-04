@@ -5,7 +5,9 @@ struct InspectorView: View {
     @ObservedObject var model: EditorViewModel
     @ObservedObject var document: LadderDocument
     @State private var label = ""
-    @State private var comment = ""
+    @State private var note = ""
+    @State private var deviceComment = ""
+    @State private var lampColor: LampColor?
     @State private var projectName = ""
     @State private var timerSeconds = 1.0
     var body: some View {
@@ -28,8 +30,14 @@ struct InspectorView: View {
                         fieldTitle("inspector.label")
                         TextField("X0", text: $label).font(.system(size: 12, design: .monospaced)).disabled(element.kind.isWire)
                             .onSubmit(applyProperties)
-                        fieldTitle("inspector.comment").padding(.top, 8)
-                        TextField("inspector.commentPlaceholder", text: $comment, axis: .vertical).lineLimit(3...5).onSubmit(applyProperties)
+                        if !element.kind.isWire {
+                            fieldTitle("inspector.deviceComment").padding(.top, 8)
+                            TextField("inspector.commentPlaceholder", text: $deviceComment, axis: .vertical).lineLimit(2...4).onSubmit(applyProperties)
+                            Text("inspector.deviceCommentHint").font(.system(size: 10)).foregroundStyle(.secondary)
+                            if element.label.hasPrefix("Y") { lampPicker($lampColor) }
+                            fieldTitle("inspector.note").padding(.top, 8)
+                            TextField("inspector.notePlaceholder", text: $note, axis: .vertical).lineLimit(2...4).onSubmit(applyProperties)
+                        }
                         if element.kind == .timer {
                             fieldTitle("inspector.timerSeconds").padding(.top, 8)
                             TextField("1.0", value: $timerSeconds, format: .number.precision(.fractionLength(0...3)))
@@ -50,6 +58,8 @@ struct InspectorView: View {
                         Text("inspector.selectionHint").font(.system(size: 11)).foregroundStyle(.secondary).lineSpacing(4)
                     }.padding(.vertical, 12)
                 }
+                Divider()
+                DeviceListView(model: model, document: document)
                 Divider()
                 fieldTitle("inspector.project")
                 TextField("inspector.projectName", text: $projectName).textFieldStyle(.roundedBorder).onSubmit(applyName)
@@ -78,17 +88,23 @@ struct InspectorView: View {
         }.background(.bar)
             .onAppear { reload() }
             .onChange(of: model.selectedElements) { _, _ in reload() }
+            .onChange(of: document.circuit.devices) { _, _ in reload() }
             .onChange(of: document.circuit.name) { _, _ in projectName = document.circuit.name }
     }
     private func reload() {
         label = model.selectedElements.first?.label ?? ""
-        comment = model.selectedElements.first?.comment ?? ""
+        let selected = model.selectedElements.first
+        note = selected?.comment ?? ""
+        deviceComment = selected.map { document.circuit.device($0.label).comment } ?? ""
+        lampColor = selected.flatMap { document.circuit.device($0.label).lampColor }
         projectName = document.circuit.name
         timerSeconds = Double(model.selectedElements.first?.presetMilliseconds ?? 1_000) / 1_000
     }
     private func applyProperties() {
         guard timerSeconds.isFinite, timerSeconds >= 0.001, timerSeconds <= 86_400 else { model.errorMessage = CircuitError.invalidTimerPreset.localizedDescription; return }
-        model.updateSelected(label: label, comment: comment, timerPresetMilliseconds: Int((timerSeconds * 1_000).rounded()))
+        let isWire = model.selectedElements.first?.kind.isWire ?? true
+        model.updateSelected(label: label, note: note, deviceComment: isWire ? nil : deviceComment, lampColor: lampColor,
+                             timerPresetMilliseconds: Int((timerSeconds * 1_000).rounded()))
     }
     private func applyName() {
         var circuit = document.circuit
@@ -101,6 +117,55 @@ struct InspectorView: View {
     }
     private func infoRow(_ key: LocalizedStringKey, value: String) -> some View {
         HStack { Text(key).foregroundStyle(.secondary); Spacer(); Text(value).monospacedDigit() }.font(.system(size: 11))
+    }
+}
+
+func lampPicker(_ selection: Binding<LampColor?>) -> some View {
+    Picker("inspector.lampColor", selection: selection) {
+        Text("lamp.none").tag(LampColor?.none)
+        ForEach(LampColor.allCases, id: \.self) { Text(LocalizedStringKey($0.localizationKey)).tag(LampColor?.some($0)) }
+    }.font(.system(size: 11))
+}
+
+/// Every address in the circuit with its shared comment. Edits apply to all symbols using that address.
+struct DeviceListView: View {
+    @ObservedObject var model: EditorViewModel
+    @ObservedObject var document: LadderDocument
+    @State private var editing: String?
+    @State private var draft = ""
+    @State private var draftLamp: LampColor?
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            fieldTitle("devices.title")
+            if document.circuit.addresses.isEmpty {
+                Text("devices.empty").font(.system(size: 10)).foregroundStyle(.tertiary)
+            }
+            ForEach(document.circuit.addresses, id: \.self) { address in
+                let info = document.circuit.device(address)
+                if editing == address {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(address).font(.system(size: 11, weight: .semibold, design: .monospaced))
+                        TextField("inspector.commentPlaceholder", text: $draft).textFieldStyle(.roundedBorder).onSubmit { save(address) }
+                        if address.hasPrefix("Y") { lampPicker($draftLamp) }
+                        HStack { Spacer(); Button("devices.cancel") { editing = nil }; Button("inspector.apply") { save(address) } }.font(.system(size: 10))
+                    }.padding(6).background(.quaternary.opacity(0.4), in: RoundedRectangle(cornerRadius: 6))
+                } else {
+                    Button { editing = address; draft = info.comment; draftLamp = info.lampColor } label: {
+                        HStack(spacing: 8) {
+                            Text(address).font(.system(size: 11, design: .monospaced)).frame(width: 44, alignment: .leading)
+                            if let lamp = info.lampColor { Circle().fill(lamp.color).frame(width: 7, height: 7) }
+                            Text(info.comment.isEmpty ? "—" : info.comment).font(.system(size: 11))
+                                .foregroundStyle(info.comment.isEmpty ? .tertiary : .primary).lineLimit(1)
+                            Spacer()
+                        }.contentShape(Rectangle())
+                    }.buttonStyle(.plain)
+                }
+            }
+        }
+    }
+    private func save(_ address: String) { model.updateDevice(address, comment: draft, lampColor: draftLamp); editing = nil }
+    private func fieldTitle(_ key: LocalizedStringKey) -> some View {
+        Text(key).font(.system(size: 10, weight: .semibold)).foregroundStyle(.secondary)
     }
 }
 

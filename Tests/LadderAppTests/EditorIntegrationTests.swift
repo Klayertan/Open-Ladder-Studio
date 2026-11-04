@@ -34,6 +34,21 @@ final class EditorIntegrationTests: XCTestCase {
         XCTAssertEqual(document.circuit.elements.count, 1)
         XCTAssertEqual(try document.snapshot(contentType: .ladderProject), document.circuit)
     }
+    @MainActor func testInspectorEditsDeviceAndNoteAsOneUndoStep() throws {
+        let document = LadderDocument(circuit: ExampleCircuits.sealIn)
+        let model = EditorViewModel(document: document), undo = UndoManager()
+        model.undoManager = undo
+        let coil = try XCTUnwrap(document.circuit.elements.first { $0.kind == .coil && $0.label == "Y0" })
+        let before = document.circuit
+        model.selection = [coil.id]
+        undo.beginUndoGrouping()
+        model.updateSelected(label: "Y0", note: "", deviceComment: "モーター", lampColor: .red)
+        undo.endUndoGrouping()
+        XCTAssertNil(model.errorMessage)
+        XCTAssertEqual(document.circuit.device("Y0"), DeviceInfo(comment: "モーター", lampColor: .red))
+        undo.undo()
+        XCTAssertEqual(document.circuit, before)
+    }
     @MainActor func testFailedMoveDoesNotAddUndoOrMutateDocument() {
         let document = LadderDocument(circuit: ExampleCircuits.sealIn)
         let model = EditorViewModel(document: document), undo = UndoManager()

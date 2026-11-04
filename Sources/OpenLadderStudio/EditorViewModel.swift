@@ -80,9 +80,19 @@ final class EditorViewModel: ObservableObject {
         guard !selection.isEmpty, columns != 0 || rows != 0 else { return }
         perform("action.move") { try CircuitEditing.move(selection, columns: columns, rows: rows, in: circuit) }
     }
-    func updateSelected(label: String, comment: String, timerPresetMilliseconds: Int? = nil) {
+    /// `deviceComment` and `lampColor` change the shared definition; `note` belongs to this symbol only.
+    func updateSelected(label: String, note: String, deviceComment: String? = nil, lampColor: LampColor? = nil, timerPresetMilliseconds: Int? = nil) {
         guard selection.count == 1, let id = selection.first else { return }
-        perform("action.properties") { try CircuitEditing.update(id, label: label, comment: comment, timerPresetMilliseconds: timerPresetMilliseconds, in: circuit) }
+        perform("action.properties") {
+            var result = try CircuitEditing.update(id, label: label, comment: note, timerPresetMilliseconds: timerPresetMilliseconds, in: circuit)
+            if let deviceComment, let e = result.elements.first(where: { $0.id == id }), !e.kind.isWire {
+                result = try CircuitEditing.setDevice(e.label, comment: deviceComment, lampColor: lampColor, in: result)
+            }
+            return result
+        }
+    }
+    func updateDevice(_ address: String, comment: String, lampColor: LampColor?) {
+        perform("action.device") { try CircuitEditing.setDevice(address, comment: comment, lampColor: lampColor, in: circuit) }
     }
     func copy() {
         guard !selectedElements.isEmpty else { return }

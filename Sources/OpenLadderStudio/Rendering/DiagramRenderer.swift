@@ -80,8 +80,9 @@ enum DiagramRenderer {
             if !element.kind.isWire {
                 context.draw(Text(element.label).font(.system(size: 12, weight: .semibold, design: .monospaced)).foregroundColor(selected ? accent : ink),
                              at: CGPoint(x: (start.x + end.x) / 2, y: start.y - 28))
-                if !element.comment.isEmpty {
-                    let comment = element.comment.count > 13 ? String(element.comment.prefix(12)) + "…" : element.comment
+                let note = circuit.displayComment(for: element)
+                if !note.isEmpty {
+                    let comment = note.count > 13 ? String(note.prefix(12)) + "…" : note
                     context.draw(Text(comment).font(.system(size: 9)).foregroundColor(muted), at: CGPoint(x: (start.x + end.x) / 2, y: start.y + 29))
                 }
             }

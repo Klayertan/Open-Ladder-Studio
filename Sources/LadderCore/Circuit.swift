@@ -24,6 +24,27 @@ public enum SymbolKind: String, Codable, CaseIterable, Sendable {
     public var localizationKey: String { "symbol.\(rawValue)" }
 }
 
+public enum LampColor: String, Codable, CaseIterable, Sendable {
+    case green, yellow, red, blue, white
+    public var localizationKey: String { "lamp.\(rawValue)" }
+    /// Only used once, when migrating files that predate the device table.
+    static func inferred(from comment: String) -> LampColor? {
+        let note = comment.lowercased()
+        if note.contains("青") || note.contains("緑") || note.contains("green") { return .green }
+        if note.contains("黄") || note.contains("yellow") { return .yellow }
+        if note.contains("赤") || note.contains("red") { return .red }
+        return nil
+    }
+}
+
+/// One definition per address. Every symbol with that label shares it.
+public struct DeviceInfo: Codable, Hashable, Sendable {
+    public var comment: String
+    public var lampColor: LampColor?
+    public init(comment: String = "", lampColor: LampColor? = nil) { self.comment = comment; self.lampColor = lampColor }
+    public var isEmpty: Bool { comment.isEmpty && lampColor == nil }
+}
+
 /// A symbol is an electrical edge between two integer grid nodes.
 /// Horizontal elements occupy one cell; vertical wires occupy its left boundary.
 public struct LadderElement: Codable, Identifiable, Hashable, Sendable {
@@ -31,6 +52,7 @@ public struct LadderElement: Codable, Identifiable, Hashable, Sendable {
     public var kind: SymbolKind
     public var position: GridPoint
     public var label: String
+    /// Per-symbol note. When empty, the device comment is shown instead.
     public var comment: String
     public var timerPresetMilliseconds: Int?
     public var presetMilliseconds: Int { timerPresetMilliseconds ?? 1_000 }
@@ -49,14 +71,52 @@ public struct LadderElement: Codable, Identifiable, Hashable, Sendable {
 }
 
 public struct Circuit: Codable, Equatable, Sendable {
-    public static let formatVersion = 2
+    public static let formatVersion = 3
+    public static let addressPattern = "^[A-Z][A-Z0-9_]{0,15}$"
     public var version: Int
     public var name: String
     public var columns: Int
     public var rows: Int
     public var elements: [LadderElement]
-    public init(name: String = "Untitled", columns: Int = 10, rows: Int = 10, elements: [LadderElement] = []) {
-        version = Self.formatVersion; self.name = name; self.columns = columns; self.rows = rows; self.elements = elements
+    public var devices: [String: DeviceInfo]
+    public init(name: String = "Untitled", columns: Int = 10, rows: Int = 10, elements: [LadderElement] = [], devices: [String: DeviceInfo] = [:]) {
+        version = Self.formatVersion; self.name = name; self.columns = columns; self.rows = rows; self.elements = elements; self.devices = devices
+    }
+    enum CodingKeys: String, CodingKey { case version, name, columns, rows, elements, devices }
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        version = try c.decode(Int.self, forKey: .version); name = try c.decode(String.self, forKey: .name)
+        columns = try c.decode(Int.self, forKey: .columns); rows = try c.decode(Int.self, forKey: .rows)
+        elements = try c.decode([LadderElement].self, forKey: .elements)
+        devices = try c.decodeIfPresent([String: DeviceInfo].self, forKey: .devices) ?? [:]
+    }
+
+    /// Addresses used by non-wire symbols, sorted by device letter then number.
+    public var addresses: [String] {
+        Set(elements.filter { !$0.kind.isWire && !$0.label.isEmpty }.map(\.label)).sorted {
+            ($0.prefix(1), Int($0.dropFirst()) ?? .max, $0) < ($1.prefix(1), Int($1.dropFirst()) ?? .max, $1)
+        }
+    }
+    public func device(_ address: String) -> DeviceInfo { devices[address] ?? DeviceInfo() }
+    /// The text shown and exported for a symbol: its own note, else the shared device comment.
+    public func displayComment(for element: LadderElement) -> String {
+        element.comment.isEmpty ? device(element.label).comment : element.comment
+    }
+    /// Builds the device table from per-symbol comments (pre-v3 files and hand-built circuits).
+    /// An output's comment wins over a contact's; notes equal to the device comment are cleared.
+    public func adoptingCommentsAsDevices() -> Circuit {
+        var result = self
+        let sources = elements.filter { !$0.kind.isWire && !$0.comment.isEmpty }
+            .sorted { ($0.kind.isOutput ? 0 : 1) < ($1.kind.isOutput ? 0 : 1) }
+        for e in sources where result.devices[e.label]?.comment.isEmpty ?? true {
+            var info = result.device(e.label); info.comment = e.comment
+            if info.lampColor == nil, e.label.hasPrefix("Y") { info.lampColor = LampColor.inferred(from: e.comment) }
+            result.devices[e.label] = info
+        }
+        for i in result.elements.indices where result.elements[i].comment == result.devices[result.elements[i].label]?.comment {
+            result.elements[i].comment = ""
+        }
+        return result
     }
     public func contains(_ element: LadderElement) -> Bool {
         if element.kind == .verticalWire {
@@ -69,6 +129,8 @@ public struct Circuit: Codable, Equatable, Sendable {
         guard (4...128).contains(columns), (2...512).contains(rows), elements.count <= 65_536 else { throw CircuitError.invalidDimensions }
         guard Set(elements.map(\.id)).count == elements.count else { throw CircuitError.duplicateIdentifier }
         guard elements.allSatisfy(contains) else { throw CircuitError.outOfBounds }
+        guard devices.count <= 65_536, devices.allSatisfy({ $0.key.range(of: Self.addressPattern, options: .regularExpression) != nil && $0.value.comment.count <= 240 })
+        else { throw CircuitError.invalidLabel }
         // Occupancy is independent of symbol type, so a contact and a wire cannot share a cell.
         var occupied = Set<String>()
         for e in elements {
@@ -80,7 +142,7 @@ public struct Circuit: Codable, Equatable, Sendable {
     }
     public static func decode(_ data: Data) throws -> Circuit {
         var circuit = try JSONDecoder().decode(Circuit.self, from: data)
-        if circuit.version == 1 { circuit.version = formatVersion }
+        if circuit.version == 1 || circuit.version == 2 { circuit = circuit.adoptingCommentsAsDevices(); circuit.version = formatVersion }
         return try circuit.checked()
     }
     public func encoded() throws -> Data {

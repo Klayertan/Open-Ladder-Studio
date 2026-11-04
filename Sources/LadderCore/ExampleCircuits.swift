@@ -25,7 +25,7 @@ public enum ExampleCircuits {
         rung(5, contacts: [1: (.normallyOpen, "M0", "運転中"), 3: (.normallyClosed, "T0", "青時間内")], output: "Y0", comment: "青ランプ（10秒）")
         rung(6, contacts: [1: (.normallyOpen, "M0", "運転中"), 3: (.normallyOpen, "T0", "青完了"), 5: (.normallyClosed, "T1", "黄時間内")], output: "Y1", comment: "黄ランプ（2秒）")
         rung(7, contacts: [1: (.normallyOpen, "M0", "運転中"), 3: (.normallyOpen, "T1", "黄完了")], output: "Y2", comment: "赤ランプ（5秒）")
-        return Circuit(name: "練習問題10 信号機", rows: 8, elements: elements)
+        return Circuit(name: "練習問題10 信号機", rows: 8, elements: elements).adoptingCommentsAsDevices()
     }
     public static var sealIn: Circuit {
         var elements: [LadderElement] = []
@@ -37,7 +37,7 @@ public enum ExampleCircuits {
         elements += [.init(kind: .verticalWire, position: .init(1, 0)),
                      .init(kind: .normallyOpen, position: .init(1, 1), label: "Y0", comment: "Seal-in contact"),
                      .init(kind: .verticalWire, position: .init(2, 0))]
-        return Circuit(name: "Motor seal-in", elements: elements)
+        return Circuit(name: "Motor seal-in", elements: elements).adoptingCommentsAsDevices()
     }
     public static var setReset: Circuit {
         var elements: [LadderElement] = []

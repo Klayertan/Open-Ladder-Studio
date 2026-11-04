@@ -65,14 +65,15 @@ final class LadderSimulationTests: XCTestCase {
         let circuit = ExampleCircuits.trafficLight
         XCTAssertEqual(try Circuit.decode(circuit.encoded()), circuit)
         XCTAssertEqual(circuit.elements.filter { $0.kind == .timer }.map(\.presetMilliseconds), [10_000, 2_000, 5_000])
-        XCTAssertTrue(circuit.elements.filter { $0.label.hasPrefix("X") || $0.label.hasPrefix("Y") }.allSatisfy { !$0.comment.isEmpty })
+        XCTAssertTrue(circuit.elements.filter { $0.label.hasPrefix("X") || $0.label.hasPrefix("Y") }.allSatisfy { !circuit.displayComment(for: $0).isEmpty })
         XCTAssertTrue(CircuitValidation.issues(in: circuit).isEmpty)
     }
     func testLegacyVersionOneProjectsMigrate() throws {
         var circuit = ExampleCircuits.sealIn; circuit.version = 1
         let loaded = try Circuit.decode(JSONEncoder().encode(circuit))
-        XCTAssertEqual(loaded.version, 2)
+        XCTAssertEqual(loaded.version, Circuit.formatVersion)
         XCTAssertEqual(loaded.elements, circuit.elements)
+        XCTAssertEqual(loaded.devices, circuit.devices)
     }
     func testDisconnectedAndUnstableProgramsFailExplicitly() throws {
         XCTAssertThrowsError(try LadderSimulator(circuit: Circuit(elements: [.init(kind: .coil, position: .init(2, 0))])))

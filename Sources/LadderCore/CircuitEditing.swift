@@ -23,11 +23,18 @@ public enum CircuitEditing {
         guard let i = result.elements.firstIndex(where: { $0.id == id }) else { return result }
         let normalized = label.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         if !result.elements[i].kind.isWire {
-            guard normalized.range(of: "^[A-Z][A-Z0-9_]{0,15}$", options: .regularExpression) != nil else { throw CircuitError.invalidLabel }
+            guard normalized.range(of: Circuit.addressPattern, options: .regularExpression) != nil else { throw CircuitError.invalidLabel }
         }
         result.elements[i].label = result.elements[i].kind.isWire ? "" : normalized
         result.elements[i].comment = String(comment.prefix(240))
         if result.elements[i].kind == .timer, let timerPresetMilliseconds { result.elements[i].timerPresetMilliseconds = timerPresetMilliseconds }
+        return try result.checked()
+    }
+    /// Edits the shared definition of an address; every symbol with that label follows it.
+    public static func setDevice(_ address: String, comment: String, lampColor: LampColor?, in circuit: Circuit) throws -> Circuit {
+        var result = circuit
+        let info = DeviceInfo(comment: String(comment.trimmingCharacters(in: .whitespacesAndNewlines).prefix(240)), lampColor: lampColor)
+        result.devices[address] = info.isEmpty ? nil : info
         return try result.checked()
     }
     /// Adds an explicit rectangular bypass below a span. Existing matching wires are reused.
