@@ -7,17 +7,47 @@ public struct TimerState: Equatable, Sendable {
     public var done: Bool { enabled && elapsedMilliseconds >= presetMilliseconds }
 }
 
+public struct CounterState: Equatable, Sendable {
+    public var current = 0
+    public var preset: Int
+    public var done = false
+    public var lastInput = false
+}
+
+public struct PulseState: Equatable, Sendable {
+    public var lastInput = false
+}
+
 public struct SimulationEvent: Equatable, Sendable {
     public let milliseconds: Int
     public let activeOutputs: [String]
 }
 
+/// A change in an observed device. Multiple changes at the same timestamp are
+/// retained so momentary inputs and timer feedback pulses do not disappear.
+public struct SignalTransition: Equatable, Sendable {
+    public let milliseconds: Int
+    public let value: Bool
+    public let timing: Bool
+    public let count: Int?
+    public init(milliseconds: Int, value: Bool, timing: Bool = false, count: Int? = nil) {
+        self.milliseconds = milliseconds; self.value = value; self.timing = timing; self.count = count
+    }
+}
+
 public struct SimulationState: Equatable, Sendable {
+    public init() {}
     public var milliseconds = 0
     public var bits: [String: Bool] = [:]
     public var timers: [String: TimerState] = [:]
+    public var counters: [String: CounterState] = [:]
+    public var pulses: [String: PulseState] = [:]
     public var energizedElements: Set<UUID> = []
     public var events: [SimulationEvent] = []
+    public static let historyDurationMilliseconds = 120_000
+    public static let maxTransitionsPerSignal = 4_096
+    public var signalHistory: [String: [SignalTransition]] = [:]
+    public var historyStartMilliseconds: Int { max(0, milliseconds - Self.historyDurationMilliseconds) }
     public subscript(_ address: String) -> Bool { bits[address, default: false] }
 }
 
@@ -47,28 +77,31 @@ public struct LadderSimulator: Sendable {
 
     public init(circuit: Circuit) throws {
         self.circuit = try circuit.checked()
-        guard !CircuitValidation.issues(in: circuit).contains(where: { $0.severity == .error }) else { throw SimulationError.invalidConnections }
         outputs = circuit.elements.filter(\.kind.isOutput).sorted {
             ($0.position.row, $0.position.column) < ($1.position.row, $1.position.column)
         }
         var writers: [String: [SymbolKind]] = [:]
         var edges: [GridPoint: [LadderElement]] = [:]
         for element in circuit.elements where !element.kind.isWire {
-            let pattern = element.kind == .timer ? "^T[0-9]+$" : element.kind.isOutput ? "^[MY][0-9]+$" : "^[XMYT][0-9]+$"
+            let pattern = element.kind == .counter ? "^C[0-9]+$" : element.kind == .timer ? "^T[0-9]+$" : element.kind == .resetCoil ? "^[MYC][0-9]+$" : element.kind.isOutput ? "^[MY][0-9]+$" : "^[XMYTC][0-9]+$"
             guard element.label.range(of: pattern, options: .regularExpression) != nil else { throw SimulationError.invalidDevice(element.label) }
             state.bits[element.label] = false
             if element.kind.isOutput { writers[element.label, default: []].append(element.kind) }
+            if element.kind.isPulse { state.pulses[element.label] = PulseState() }
+            if element.kind == .counter { state.counters[element.label] = CounterState(preset: element.presetCount) }
             if element.kind == .timer { state.timers[element.label] = TimerState(presetMilliseconds: element.presetMilliseconds) }
         }
         for (label, kinds) in writers where kinds.count > 1 {
-            // One SET and one RESET writer are allowed; ordinary/timer duplicates are ambiguous.
-            guard kinds.count == 2 && Set(kinds) == [.setCoil, .resetCoil] else { throw SimulationError.duplicateWriter(label) }
+            // Allow SET/RESET pairs and one CTU plus RESET; other duplicate writers are ambiguous.
+            guard kinds.count == 2 && (Set(kinds) == [.setCoil, .resetCoil] || Set(kinds) == [.counter, .resetCoil]) else { throw SimulationError.duplicateWriter(label) }
         }
+        guard !CircuitValidation.issues(in: circuit).contains(where: { $0.severity == .error }) else { throw SimulationError.invalidConnections }
         for element in circuit.elements where !element.kind.isOutput {
             edges[element.position, default: []].append(element)
             if element.kind == .verticalWire { edges[element.end, default: []].append(element) }
         }
         outgoing = edges
+        recordSignals()
         try settle()
         recordOutputs()
     }
@@ -76,6 +109,7 @@ public struct LadderSimulator: Sendable {
     public mutating func setInput(_ address: String, pressed: Bool) throws {
         guard address.hasPrefix("X"), state.bits[address] != nil else { throw SimulationError.invalidDevice(address) }
         state.bits[address] = pressed
+        recordSignals()
         try settle()
         recordOutputs()
     }
@@ -98,6 +132,7 @@ public struct LadderSimulator: Sendable {
                     state.bits[label] = timer.done
                 }
             }
+            recordSignals()
             try settle()
             recordOutputs()
         }
@@ -125,15 +160,58 @@ public struct LadderSimulator: Sendable {
         return visited
     }
 
+    public mutating func reset() throws {
+        self = try LadderSimulator(circuit: circuit)
+    }
+
     private mutating func settle() throws {
+        // Relay settling is not an additional PLC scan. A counter may count at most
+        // once per input/10 ms step; reset dominates for the entire step.
+        // A pulse is a one-step output. Relay settling may discover an edge,
+        // but cannot shorten or retrigger that output within the same step.
+        for address in state.pulses.keys { state.bits[address] = false }
+        recordSignals()
+        var firedPulses = Set<String>()
+        var counted = Set<String>()
+        var resetCounters = Set<String>()
         for _ in 0..<64 {
-            let oldBits = state.bits, oldTimers = state.timers
+            let oldBits = state.bits, oldTimers = state.timers, oldCounters = state.counters, oldPulses = state.pulses
+            let pulseNodes = poweredNodes()
+            for output in outputs where output.kind.isPulse {
+                let powered = pulseNodes.contains(output.position)
+                var pulse = state.pulses[output.label]!
+                let edge = output.kind == .risingPulse ? powered && !pulse.lastInput : !powered && pulse.lastInput
+                if edge { firedPulses.insert(output.label) }
+                pulse.lastInput = powered
+                state.pulses[output.label] = pulse
+                state.bits[output.label] = firedPulses.contains(output.label)
+            }
+            let counterNodes = poweredNodes()
+            for output in outputs where output.kind == .resetCoil && output.label.hasPrefix("C") && counterNodes.contains(output.position) {
+                resetCounters.insert(output.label)
+            }
+            for output in outputs where output.kind == .counter {
+                let powered = counterNodes.contains(output.position)
+                var counter = state.counters[output.label]!
+                if resetCounters.contains(output.label) {
+                    counter.current = 0; counter.done = false; counter.lastInput = false
+                } else {
+                    if powered && !counter.lastInput && !counter.done && counted.insert(output.label).inserted {
+                        counter.current = min(counter.preset, counter.current + 1)
+                        counter.done = counter.current >= counter.preset
+                    }
+                    counter.lastInput = powered
+                }
+                state.counters[output.label] = counter
+                state.bits[output.label] = counter.done
+            }
             for output in outputs {
                 let powered = poweredNodes().contains(output.position)
                 switch output.kind {
                 case .coil: state.bits[output.label] = powered
                 case .setCoil: if powered { state.bits[output.label] = true }
-                case .resetCoil: if powered { state.bits[output.label] = false }
+                case .resetCoil:
+                    if powered && !output.label.hasPrefix("C") { state.bits[output.label] = false }
                 case .timer:
                     var timer = state.timers[output.label] ?? TimerState(presetMilliseconds: output.presetMilliseconds)
                     timer.enabled = powered
@@ -143,9 +221,11 @@ public struct LadderSimulator: Sendable {
                 default: break
                 }
             }
-            if oldBits == state.bits && oldTimers == state.timers {
+            recordSignals()
+            if oldBits == state.bits && oldTimers == state.timers && oldCounters == state.counters && oldPulses == state.pulses {
                 let nodes = poweredNodes()
                 state.energizedElements = Set(circuit.elements.filter { element in
+                    if element.kind.isPulse { return state[element.label] }
                     if element.kind.isOutput { return nodes.contains(element.position) }
                     return conducting(element) && (nodes.contains(element.position) || (element.kind == .verticalWire && nodes.contains(element.end)))
                 }.map(\.id))
@@ -153,6 +233,26 @@ public struct LadderSimulator: Sendable {
             }
         }
         throw SimulationError.unstableLogic
+    }
+
+    private mutating func recordSignals() {
+        let cutoff = state.historyStartMilliseconds
+        for (address, value) in state.bits {
+            let timer = state.timers[address]
+            let timing = timer.map { $0.enabled && !$0.done } ?? false
+            let count = state.counters[address]?.current
+            let previous = state.signalHistory[address]?.last
+            if previous?.value != value || previous?.timing != timing || previous?.count != count {
+                state.signalHistory[address, default: []].append(.init(milliseconds:state.milliseconds,value:value,timing:timing,count:count))
+            }
+            // Keep one value at/before the retained window as its starting level.
+            if let history = state.signalHistory[address], history.count > 1 {
+                let before = history.lastIndex { $0.milliseconds < cutoff } ?? 0
+                let excess = max(0, history.count - SimulationState.maxTransitionsPerSignal)
+                let remove = max(before, excess)
+                if remove > 0 { state.signalHistory[address]?.removeFirst(remove) }
+            }
+        }
     }
 
     private mutating func recordOutputs() {

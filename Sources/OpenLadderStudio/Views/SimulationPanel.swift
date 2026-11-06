@@ -18,6 +18,8 @@ struct SimulationPanel: View {
                 Circle().fill(model.isSimulationRunning ? Color.green : .secondary).frame(width: 6, height: 6)
                 Text(model.isSimulationRunning ? "simulation.running" : "simulation.paused").font(.system(size: 10)).foregroundStyle(.secondary)
                 Spacer()
+                Button { model.showTimingDiagram.toggle() } label: { Image(systemName:"waveform.path") }
+                    .tint(model.showTimingDiagram ? DiagramRenderer.accent : .secondary).help("timing.toggle")
                 Text(String(format: "t = %.2f s", Double(model.simulation?.milliseconds ?? 0) / 1_000))
                     .font(.system(size: 11, design: .monospaced)).monospacedDigit()
                 Button(model.isSimulationRunning ? "simulation.pause" : "simulation.run") {
@@ -66,6 +68,12 @@ struct SimulationPanel: View {
                                 .font(.system(size: 10, design: .monospaced)).monospacedDigit()
                             ProgressView(value: Double(timer.elapsedMilliseconds), total: Double(timer.presetMilliseconds)).tint(timer.done ? .green : DiagramRenderer.accent)
                         }
+                    }
+                }
+                ForEach((model.simulation?.counters.keys.map { $0 } ?? []).sorted(), id: \.self) { address in
+                    if let counter = model.simulation?.counters[address] {
+                        Text("\(address)  \(counter.current) / \(counter.preset)  \(counter.done ? "TRUE" : "FALSE")")
+                            .font(.system(size: 10, design: .monospaced)).foregroundStyle(counter.done ? .green : .primary)
                     }
                 }
                 if timers.isEmpty { Text("simulation.hint").font(.system(size: 10)).foregroundStyle(.secondary) }

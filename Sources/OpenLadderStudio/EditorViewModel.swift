@@ -3,13 +3,13 @@ import AppKit
 import LadderCore
 
 enum EditorTool: Equatable {
-    case select, pan, symbol(SymbolKind), branch
+    case select, symbol(SymbolKind), branch, wire
     var key: String {
         switch self {
         case .select: "tool.select"
-        case .pan: "tool.pan"
         case .symbol(let kind): kind.localizationKey
         case .branch: "tool.branch"
+        case .wire: "tool.wire"
         }
     }
 }
@@ -30,6 +30,7 @@ final class EditorViewModel: ObservableObject {
     @Published var dragOffset = GridPoint(0, 0)
     @Published var statusKey = "status.ready"
     @Published var showSimulation = false
+    @Published var showTimingDiagram = true
     @Published private(set) var simulation: SimulationState?
     @Published private(set) var isSimulationRunning = false
     private var simulator: LadderSimulator?
@@ -59,13 +60,23 @@ final class EditorViewModel: ObservableObject {
     func place(at point: GridPoint) {
         switch tool {
         case .symbol(let kind):
-            let e = LadderElement(kind: kind, position: point, label: nextLabel(for: kind))
-            perform("action.place") { try CircuitEditing.insert([e], into: circuit) }
-            if circuit.elements.contains(where: { $0.id == e.id }) { selection = [e.id] }
+            placeSymbol(kind, at: point)
         case .branch:
             perform("action.branch") { try CircuitEditing.branch(from: point, width: branchWidth, in: circuit) }
-        case .select, .pan: break
+        case .select, .wire: break
         }
+    }
+    func placeSymbol(_ kind: SymbolKind, at point: GridPoint) {
+        let element = LadderElement(kind: kind, position: point, label: nextLabel(for: kind))
+        perform("action.place") { try CircuitEditing.place(element,in: circuit) }
+        if circuit.elements.contains(where: { $0.id == element.id }) { selection = [element.id] }
+    }
+    func connect(from start: GridPoint, to end: GridPoint, horizontalFirst: Bool) {
+        perform("action.wire") { try CircuitEditing.connect(from: start,to: end,horizontalFirst: horizontalFirst,in: circuit) }
+    }
+    func scrollZoom(delta: CGFloat, at anchor: CGPoint) {
+        guard delta.isFinite else { return }
+        setZoom(zoom * exp(min(100,max(-100,delta)) * 0.01),around: anchor)
     }
     func nextLabel(for kind: SymbolKind) -> String {
         guard !kind.isWire else { return "" }
@@ -81,10 +92,10 @@ final class EditorViewModel: ObservableObject {
         perform("action.move") { try CircuitEditing.move(selection, columns: columns, rows: rows, in: circuit) }
     }
     /// `deviceComment` and `lampColor` change the shared definition; `note` belongs to this symbol only.
-    func updateSelected(label: String, note: String, deviceComment: String? = nil, lampColor: LampColor? = nil, timerPresetMilliseconds: Int? = nil) {
+    func updateSelected(label: String, note: String, deviceComment: String? = nil, lampColor: LampColor? = nil, timerPresetMilliseconds: Int? = nil, counterPreset: Int? = nil) {
         guard selection.count == 1, let id = selection.first else { return }
         perform("action.properties") {
-            var result = try CircuitEditing.update(id, label: label, comment: note, timerPresetMilliseconds: timerPresetMilliseconds, in: circuit)
+            var result = try CircuitEditing.update(id, label: label, comment: note, timerPresetMilliseconds: timerPresetMilliseconds, counterPreset: counterPreset, in: circuit)
             if let deviceComment, let e = result.elements.first(where: { $0.id == id }), !e.kind.isWire {
                 result = try CircuitEditing.setDevice(e.label, comment: deviceComment, lampColor: lampColor, in: result)
             }

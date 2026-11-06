@@ -10,6 +10,7 @@ struct InspectorView: View {
     @State private var lampColor: LampColor?
     @State private var projectName = ""
     @State private var timerSeconds = 1.0
+    @State private var counterPreset = 8
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
@@ -42,6 +43,14 @@ struct InspectorView: View {
                             fieldTitle("inspector.timerSeconds").padding(.top, 8)
                             TextField("1.0", value: $timerSeconds, format: .number.precision(.fractionLength(0...3)))
                                 .onSubmit(applyProperties)
+                        }
+                        if element.kind == .counter {
+                            fieldTitle("inspector.counterPreset").padding(.top, 8)
+                            TextField("8", value: $counterPreset, format: .number).onSubmit(applyProperties)
+                            let counter = model.simulation?.counters[element.label]
+                            infoRow("inspector.counterCurrent", value: "\(counter?.current ?? 0)")
+                            infoRow("inspector.counterDone", value: counter?.done == true ? "TRUE" : "FALSE")
+                            infoRow("inspector.counterInput", value: counter?.lastInput == true ? "ON" : "OFF")
                         }
                         Button("inspector.apply", action: applyProperties).frame(maxWidth: .infinity, alignment: .trailing)
                     }.textFieldStyle(.roundedBorder)
@@ -98,13 +107,15 @@ struct InspectorView: View {
         deviceComment = selected.map { document.circuit.device($0.label).comment } ?? ""
         lampColor = selected.flatMap { document.circuit.device($0.label).lampColor }
         projectName = document.circuit.name
+        counterPreset = selected?.presetCount ?? 8
         timerSeconds = Double(model.selectedElements.first?.presetMilliseconds ?? 1_000) / 1_000
     }
     private func applyProperties() {
         guard timerSeconds.isFinite, timerSeconds >= 0.001, timerSeconds <= 86_400 else { model.errorMessage = CircuitError.invalidTimerPreset.localizedDescription; return }
+        guard (1...32_767).contains(counterPreset) else { model.errorMessage = CircuitError.invalidCounterPreset.localizedDescription; return }
         let isWire = model.selectedElements.first?.kind.isWire ?? true
         model.updateSelected(label: label, note: note, deviceComment: isWire ? nil : deviceComment, lampColor: lampColor,
-                             timerPresetMilliseconds: Int((timerSeconds * 1_000).rounded()))
+                             timerPresetMilliseconds: Int((timerSeconds * 1_000).rounded()), counterPreset: counterPreset)
     }
     private func applyName() {
         var circuit = document.circuit

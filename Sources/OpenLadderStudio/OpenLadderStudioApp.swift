@@ -33,11 +33,11 @@ struct EditorCommands: Commands {
         }
         CommandMenu("menu.circuit") {
             Button("tool.select") { editor?.tool = .select }
-            Button("tool.pan") { editor?.tool = .pan }
             Divider()
             ForEach(SymbolKind.allCases, id: \.self) { kind in
                 Button(LocalizedStringKey(kind.localizationKey)) { editor?.tool = .symbol(kind) }
             }
+            Button("tool.wire") { editor?.tool = .wire }
             Button("tool.branch") { editor?.tool = .branch }
             Divider()
             Button("edit.delete") { EditorTextActions.route(#selector(NSText.deleteBackward(_:))) { editor?.deleteSelection() } }.keyboardShortcut(.delete, modifiers: [])

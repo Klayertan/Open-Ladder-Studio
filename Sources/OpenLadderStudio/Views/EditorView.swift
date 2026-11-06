@@ -23,7 +23,13 @@ struct EditorView: View {
                     VStack(spacing: 0) {
                         editorHeader
                         Divider()
-                        LadderCanvasView(model: model, document: document, viewport: $viewport)
+                        VSplitView {
+                            LadderCanvasView(model: model, document: document, viewport: $viewport).frame(minHeight:120)
+                            if model.showSimulation && model.showTimingDiagram {
+                                TimingDiagramView(model:model,document:document)
+                                    .frame(minHeight:150,idealHeight:260)
+                            }
+                        }
                         if model.showSimulation {
                             Divider()
                             SimulationPanel(model: model, document: document).frame(height: 208)
@@ -105,6 +111,7 @@ struct EditorView: View {
                 Button("example.sealIn") { requestExample(0) }
                 Button("example.setReset") { requestExample(1) }
                 Button("example.trafficLight") { requestExample(3) }
+                Button("example.pedestrian") { requestExample(4) }
                 Divider()
                 Button("example.blank") { requestExample(2) }
             } label: { Label("example.menu", systemImage: "square.stack") }.help("example.menu")
@@ -123,7 +130,7 @@ struct EditorView: View {
         if document.circuit.elements.isEmpty { loadExample(choice) } else { pendingExample = choice }
     }
     private func loadExample(_ choice: Int) {
-        model.replace(with: choice == 0 ? ExampleCircuits.sealIn : choice == 1 ? ExampleCircuits.setReset : choice == 3 ? ExampleCircuits.trafficLight : Circuit())
+        model.replace(with: choice == 0 ? ExampleCircuits.sealIn : choice == 1 ? ExampleCircuits.setReset : choice == 3 ? ExampleCircuits.trafficLight : choice == 4 ? ExampleCircuits.pedestrianCrossing : Circuit())
         model.showSimulation = choice == 3
         model.fit(in: viewport)
     }

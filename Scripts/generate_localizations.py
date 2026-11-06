@@ -7,8 +7,8 @@ strings = {
 'sidebar.tools': ('TOOLS', 'ツール'), 'sidebar.contacts': ('CONTACTS', '接点'),
 'sidebar.outputs': ('OUTPUTS', '出力'), 'sidebar.connections': ('CONNECTIONS', '接続'),
 'sidebar.hintTitle': ('Build your first rung', '最初の回路を描く'),
-'sidebar.hint': ('Choose a component, then click a grid cell. Use V to select and drag. Shift-click selects multiple elements.', '部品を選び、グリッドをクリックして配置します。Vで選択・移動、Shift＋クリックで複数選択できます。'),
-'tool.select': ('Select', '選択'), 'tool.pan': ('Pan', '移動'), 'tool.branch': ('Parallel branch', '並列分岐'),
+'sidebar.hint': ('Click a symbol tool, then click the grid, or drag it from the sidebar. W draws wires: drag between terminals or click two endpoints. Shift flips the bend. Esc cancels.', '記号を選んでグリッドをクリック、またはサイドバーからドラッグ。Wで配線：端子間をドラッグ、または両端をクリック。Shiftで曲がり方向を変更。Escで取消。'),
+'tool.select': ('Select', '選択'), 'tool.branch': ('Parallel branch', '並列分岐'),
 'symbol.normallyOpen': ('NO contact', 'a接点（常開）'), 'symbol.normallyClosed': ('NC contact', 'b接点（常閉）'),
 'symbol.coil': ('Output coil', '出力コイル'), 'symbol.setCoil': ('SET coil', 'SETコイル'), 'symbol.resetCoil': ('RESET coil', 'RESETコイル'),
 'symbol.horizontalWire': ('Horizontal wire', '横配線'), 'symbol.verticalWire': ('Vertical wire', '縦配線'),
@@ -50,8 +50,8 @@ strings = {
 'inspector.nativeFormat': ('Native .ladder / JSON', 'ネイティブ .ladder / JSON'),
 'inspector.futureHint': ('Version 0.1 · Editing and validation\nSimulation and Renri import are not included.', 'バージョン0.1：編集・接続検証\nシミュレーションとRenri読み込みは未搭載です。'),
 'canvas.accessibility': ('Interactive ladder circuit canvas', 'ラダー回路の編集キャンバス'), 'canvas.emptyTitle': ('A new circuit starts here.', 'ここから、回路を描こう。'),
-'canvas.emptyHint': ('Pick a contact from the sidebar and click to place it.\nOr explore a complete example circuit.', 'サイドバーで接点を選び、クリックして配置。\nサンプル回路から始めることもできます。'),
-'canvas.panHint': ('H + drag to pan · pinch to zoom', 'Hでドラッグ移動・ピンチで拡大縮小'),
+'canvas.emptyHint': ('Click or drag a sidebar symbol onto the grid. Use W to draw wires between terminals. Scroll to zoom; drag blank space to pan.', 'サイドバーの記号を選んでクリック、またはグリッドへドラッグ。Wで端子間を配線。スクロールで拡大縮小、空白をドラッグして移動。'),
+'canvas.panHint': ('Scroll to zoom · Drag blank space to pan · W wire pen', 'スクロールで拡大縮小・空白ドラッグで移動・Wで配線ペン'),
 'validation.check': ('Validate connections', '接続を検証'), 'validation.title': ('Connection checks', '接続チェック'),
 'validation.empty': ('Place elements to begin checking connections.', '要素を配置すると接続をチェックします。'),
 'validation.valid': ('All terminals connect between the power rails.', 'すべての端子が電源母線間に接続されています。'),
@@ -69,6 +69,26 @@ strings = {
 'action.resize': ('Expand Grid', 'グリッドを拡張'), 'action.example': ('Replace Circuit', '回路を置き換え'), 'action.rename': ('Rename Circuit', '回路名を変更')
 }
 strings.update({
+'timing.title': ('Timing diagram', 'タイミングチャート'),
+'timing.window': ('Visible time span', '表示時間幅'),
+'timing.all': ('Fit history', '全履歴'),
+'timing.follow': ('Follow', '追従'),
+'timing.close': ('Close expanded chart', '拡大表示を閉じる'),
+'timing.expand': ('Expand timing diagram', 'タイミングチャートを拡大'),
+'timing.toggle': ('Show or hide timing diagram', 'タイミングチャートを表示／非表示'),
+'timing.accessibility': ('Live device timing diagram', 'デバイスのライブタイミングチャート'),
+'timing.legend': ('High = ON · Hatching = TON counting · Vertical dots = brief pulses · Counter numbers = count events · Last 120 s retained', '上段＝ON・斜線＝タイマ計時中・縦線上の点＝瞬時パルス・カウンタ数字＝カウント・直近120秒を保持'),
+ 'tool.wire': ('Wire pen', '配線ペン'),
+'action.wire': ('Draw Connections', '配線を描く'),
+'symbol.risingPulse': ('PLS rising pulse', 'PLS立上りパルス'),
+'symbol.fallingPulse': ('PLF falling pulse', 'PLF立下りパルス'),
+'example.pedestrian': ('Eight-flash pedestrian crossing', '歩行者信号・8回点滅'),
+'symbol.counter': ('CTU counter', 'CTUカウンタ'),
+'inspector.counterPreset': ('COUNTER PRESET', 'カウンタ設定値'),
+'inspector.counterCurrent': ('Current count', '現在値'),
+'inspector.counterDone': ('Completed', '完了'),
+'inspector.counterInput': ('Last input', '前回入力'),
+'error.counterPreset': ('Counter presets must be integers from 1 to 32,767.', 'カウンタ設定値は1～32,767の整数にしてください。'),
 'symbol.timer': ('TON timer', 'オンディレイタイマ'),
 'example.trafficLight': ('Exercise 10 - Traffic light', '練習問題10 - 信号機'),
 'inspector.timerSeconds': ('TIMER PRESET (SECONDS)', 'タイマ設定値（秒）'),
@@ -84,7 +104,7 @@ strings.update({
 'simulation.hint': ('Run, then press an input button. Timer values remain editable in the inspector.', '実行して入力ボタンを押してください。タイマ設定値はインスペクタで編集できます。'),
 'simulation.educational': ('Educational relay simulation - 10 ms time steps. Changes to the circuit pause and reset the simulator.', '教育用リレーシミュレーション・10ms刻み。回路を編集すると実行を停止して状態をリセットします。'),
 'simulation.error.connections': ('Connect the circuit and resolve validation errors before simulation.', '接続チェックのエラーを解消してから実行してください。'),
-'simulation.error.device': ('Unsupported simulation address: %@. Use X/M/Y/T contacts, M/Y coils, and T timers followed by digits.', 'シミュレーションで使用できないデバイス：%@。接点はX/M/Y/T、コイルはM/Y、タイマはTの後に数字を指定します。'),
+'simulation.error.device': ('Unsupported simulation address: %@. Use X/M/Y/T/C contacts, M/Y coils, C counters, C RESET coils, and T timers followed by digits.', 'シミュレーションで使用できないデバイス：%@。接点はX/M/Y/T/C、コイルはM/Y、カウンタとカウンタRESETはC、タイマはTの後に数字を指定します。'),
 'simulation.error.writer': ('Multiple incompatible output instructions write to %@.', '%@に対して複数の出力命令が重複しています。'),
 'simulation.error.unstable': ('Relay logic did not settle. Check for contradictory or self-inverting feedback.', 'リレー状態が収束しません。矛盾する命令や自己反転する帰還を確認してください。'),
 'inspector.futureHint': ('Version 0.2 - Editing, timers and educational simulation. Renri .mbs support remains unverified.', 'バージョン0.2：編集・タイマ・教育用シミュレーション。Renri .mbs互換性は未検証です。'),
@@ -93,10 +113,10 @@ strings.update({
 strings.update({
 'export.renri': ('Export Renri MBS (experimental)…', 'Renri MBSを書き出す（試験版）…'),
 'export.renriWarning': ('Experimental Renri format export. Open and compile the file in Renri to verify compatibility before submitting it.', 'Renri形式への試験的な書き出しです。提出前にRenriで開き、コンパイルして互換性を確認してください。'),
-'renri.error.layout': ('Experimental MBS export supports complete series rungs and the single-cell NO holding branch used in Exercise 10. This circuit uses an unsupported layout.', '試験版MBS書き出しは直列回路と練習問題10の1マス自己保持分岐に対応します。この回路の配置には対応していません。'),
-'renri.error.device': ('MBS export supports numbered X/Y/M/T contacts, M/Y coils, and T timers.', 'MBS書き出しはX/Y/M/T接点、M/Yコイル、Tタイマに対応します。'),
+'renri.error.layout': ('MBS export could not represent this circuit. Check that every rung is connected, and simplify very large branch networks.', 'この回路をMBS形式で表現できません。各回路の接続を確認し、大きな分岐回路を簡略化してください。'),
+'renri.error.device': ('MBS export supports numbered X/Y/M/T/C contacts, M/Y coils, C counters and resets, and T timers.', 'MBS書き出しはX/Y/M/T/C接点、M/Yコイル、Cカウンタとリセット、Tタイマに対応します。'),
 'renri.error.timer': ('MBS export requires 100 ms timer presets, from 0.1 to 999.9 seconds.', 'MBS書き出しのタイマは0.1秒単位、0.1～999.9秒にしてください。'),
-'renri.error.encoding': ('A filename or comment cannot be represented in the supported Shift-JIS MBS syntax. Remove emoji, spaces, and backslashes from comments.', 'ファイル名またはコメントをShift-JISのMBS形式で表現できません。コメント中の絵文字・空白・バックスラッシュを除いてください。')
+'renri.error.encoding': ('A filename or comment cannot be represented in the supported Shift-JIS MBS syntax. Remove unsupported characters such as emoji and literal backslashes; spaces are exported as full-width spaces.', 'ファイル名またはコメントをShift-JISのMBS形式で表現できません。絵文字などの非対応文字とバックスラッシュを除いてください。空白は全角で書き出します。')
 })
 for index, language in enumerate(['en', 'ja']):
     def quote(text):

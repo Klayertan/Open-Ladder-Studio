@@ -50,3 +50,42 @@ public enum ExampleCircuits {
         return Circuit(name: "Set and reset memory", elements: elements)
     }
 }
+
+extension ExampleCircuits {
+    /// Complete single-run pedestrian sequence: 5 s / 2 s / 3 s / 12 s,
+    /// eight half-second on/off flashes, then a 3 s clearance timer.
+    /// X0 starts, X1 stops; stop clears C0 and all non-retentive timers.
+    public static var pedestrianCrossing: Circuit {
+        var elements: [LadderElement] = []
+        func rung(_ contacts: [(SymbolKind, String)], _ kind: SymbolKind, _ label: String, _ preset: Int = 0) {
+            let row = elements.count / 10
+            for column in 0..<10 {
+                if column == 9 {
+                    elements.append(.init(kind: kind, position: .init(column, row), label: label,
+                                          timerPresetMilliseconds: kind == .timer ? preset : nil,
+                                          counterPreset: kind == .counter ? preset : nil))
+                } else if column < contacts.count {
+                    elements.append(.init(kind: contacts[column].0, position: .init(column, row), label: contacts[column].1))
+                } else { elements.append(.init(kind: .horizontalWire, position: .init(column, row))) }
+            }
+        }
+        rung([(.normallyOpen,"X0")], .setCoil,"M0")
+        rung([(.normallyOpen,"X1")], .resetCoil,"M0")
+        rung([(.normallyOpen,"M0")], .timer,"T0",5000)
+        rung([(.normallyOpen,"T0")], .timer,"T1",2000)
+        rung([(.normallyOpen,"T1")], .timer,"T2",3000)
+        rung([(.normallyOpen,"T2")], .timer,"T3",12000)
+        rung([(.normallyOpen,"T3"),(.normallyClosed,"T5"),(.normallyClosed,"C0")], .timer,"T4",500)
+        rung([(.normallyOpen,"T4"),(.normallyClosed,"C0")], .timer,"T5",500)
+        rung([(.normallyOpen,"T5")], .counter,"C0",8)
+        rung([(.normallyOpen,"C0")], .timer,"T6",3000)
+        rung([(.normallyClosed,"M0")], .resetCoil,"C0")
+        rung([(.normallyOpen,"M0"),(.normallyClosed,"T0")], .coil,"Y0")
+        rung([(.normallyOpen,"T0"),(.normallyClosed,"T1")], .coil,"Y1")
+        rung([(.normallyOpen,"T1"),(.normallyClosed,"T2")], .coil,"Y2")
+        rung([(.normallyOpen,"T2"),(.normallyClosed,"T3")], .coil,"Y3")
+        rung([(.normallyOpen,"T3"),(.normallyClosed,"T4"),(.normallyClosed,"C0")], .coil,"Y4")
+        rung([(.normallyOpen,"T6")], .coil,"Y5")
+        return Circuit(name: "Eight-flash pedestrian crossing", columns: 10, rows: 18, elements: elements)
+    }
+}

@@ -18,7 +18,6 @@ struct ComponentSidebar: View {
                 VStack(alignment: .leading, spacing: 5) {
                     sectionTitle("sidebar.tools")
                     toolRow(.select, icon: "cursorarrow", shortcut: "V")
-                    toolRow(.pan, icon: "hand.draw", shortcut: "H")
                     sectionTitle("sidebar.contacts").padding(.top, 20)
                     symbolRow(.normallyOpen, shortcut: "1")
                     symbolRow(.normallyClosed, shortcut: "2")
@@ -27,9 +26,11 @@ struct ComponentSidebar: View {
                     symbolRow(.setCoil, shortcut: "4")
                     symbolRow(.resetCoil, shortcut: "5")
                     symbolRow(.timer, shortcut: "8")
+                    symbolRow(.counter, shortcut: "9")
+                    symbolRow(.risingPulse, shortcut: "P")
+                    symbolRow(.fallingPulse, shortcut: "F")
                     sectionTitle("sidebar.connections").padding(.top, 20)
-                    symbolRow(.horizontalWire, shortcut: "6")
-                    symbolRow(.verticalWire, shortcut: "7")
+                    toolRow(.wire, icon: "pencil.tip", shortcut: "W")
                     toolRow(.branch, icon: "point.topleft.down.to.point.bottomright.curvepath", shortcut: "B")
                 }.padding(.horizontal, 12).padding(.bottom, 20)
             }
@@ -48,6 +49,7 @@ struct ComponentSidebar: View {
     }
     private func symbolRow(_ kind: SymbolKind, shortcut: String) -> some View {
         row(.symbol(kind), shortcut: shortcut) { SymbolPreview(kind: kind) }
+            .draggable("openladder.symbol:\(kind.rawValue)")
     }
     private func row<Icon: View>(_ tool: EditorTool, shortcut: String, @ViewBuilder icon: () -> Icon) -> some View {
         Button { model.tool = tool } label: {

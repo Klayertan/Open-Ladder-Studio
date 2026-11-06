@@ -56,11 +56,27 @@ final class DeviceTableTests: XCTestCase {
         XCTAssertEqual(circuit.addresses, ["M1", "X2", "X10", "Y0"])
     }
 
-    /// The device table must not change exported bytes: compare with the file verified before this change.
-    func testTrafficExportMatchesPreviouslyVerifiedFile() throws {
+    /// Ignore only the documented comment-display bit; instructions and operands must match.
+    func testTrafficInstructionRecordsMatchPreviouslyVerifiedFile() throws {
         let saved = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
             .appendingPathComponent("output/exercise10/KADAI10.MBS")
         let expected = try Data(contentsOf: saved)
-        XCTAssertEqual(try RenriMBSExporter.export(ExampleCircuits.trafficLight), expected)
+        func instructionRecords(_ data: Data) throws -> [String] {
+            let text = try XCTUnwrap(String(data:data,encoding:.shiftJIS))
+            let lines = text.components(separatedBy:"\r\n")
+            let end = try XCTUnwrap(lines.firstIndex { $0.contains("000000FF0") })
+            return try lines.prefix(end+1).map { line in
+                let parts = line.split(separator:" ")
+                guard let boundary = parts.firstIndex(of:"DDDDDDDDD") else { return line }
+                var layout: [UInt32] = []
+                for token in parts[1..<boundary] {
+                    let repeats = try XCTUnwrap(Int(token.prefix(1),radix:16)) + 1
+                    let word = try XCTUnwrap(UInt32(token.dropFirst(),radix:16)) & ~RenriMBSExporter.commentDisplayFlag
+                    layout += Array(repeating:word,count:repeats)
+                }
+                return String(parts[0]) + " " + layout.map { String(format:"%08X",$0) }.joined(separator:" ") + " DDDDDDDDD " + parts[(boundary+1)...].joined(separator:" ")
+            }
+        }
+        XCTAssertEqual(try instructionRecords(RenriMBSExporter.export(ExampleCircuits.trafficLight)),try instructionRecords(expected))
     }
 }

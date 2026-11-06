@@ -47,7 +47,6 @@ Canvas tool keys work while the canvas has keyboard focus:
 | Key | Tool |
 | --- | --- |
 | V | Select |
-| H | Pan |
 | 1 / 2 | Normally open / normally closed contact |
 | 3 / 4 / 5 | Output / SET / RESET coil |
 | 6 / 7 | Horizontal / vertical wire |
@@ -85,7 +84,7 @@ Both files use the same versioned JSON format as user projects. They can be open
 
 ```text
 Sources/LadderCore/          Codable value model, pure editing, graph validation,
-                            example circuits, relay/TON simulation, importer protocol
+                            example circuits, relay/TON/CTU simulation, importer protocol
 Sources/OpenLadderStudio/    ReferenceFileDocument, MVVM editor, native commands
   Rendering/                Shared SwiftUI Canvas paths and PNG/PDF exporter
   Views/                    Sidebar, canvas interaction, inspector, issue panel
@@ -98,7 +97,7 @@ Tests/LadderAppTests/        Undo/redo, clipboard, document snapshots, export te
 
 `EditorViewModel` commits validated values, registers inverse transactions with the document window's native `UndoManager`, and mutates the observable document. `LadderDocument` publishes changes on the main actor; a lock protects value snapshots for background serialization. Native `.ladder` document registration is declared in `Info.plist`.
 
-`CircuitImporter` is a separate interface for format adapters. `NativeJSONImporter` works today. `RenriImporter` is a deliberately disabled stub that always reports unsupported import. **Renri `.mbs` compatibility is unverified and is not provided.** No `.mbs` file association is registered.
+`CircuitImporter` is a separate interface for format adapters. `NativeJSONImporter` works today. `RenriImporter` is a deliberately disabled stub that always reports unsupported import. **Renri `.mbs` export is experimental; opening/compilation compatibility is unverified.** No `.mbs` file association is registered.
 
 ## Tests and reproducible assets
 
@@ -126,7 +125,7 @@ The checked-in Xcode project, translations, examples, and icon require no regene
 
 ## Version 0.2 boundaries
 
-No PLC connection, counter instructions, Renri import, or verified hardware execution semantics are included. Renri export is limited and experimental. The grid is expandable rather than infinite. Symbol graphics follow the visual conventions shown in the reference; manufacturer-specific device semantics and full JIS compliance have not been verified. Validation uses undirected connectivity and does not prove instruction ordering or PLC execution semantics.
+No PLC connection, Renri import, or verified hardware execution semantics are included. Renri export is limited and experimental. The grid is expandable rather than infinite. Symbol graphics follow the visual conventions shown in the reference; manufacturer-specific device semantics and full JIS compliance have not been verified. Validation uses undirected connectivity and does not prove instruction ordering or PLC execution semantics.
 
 
 ## Exercise 10 and educational simulation
@@ -157,3 +156,23 @@ Project JSON is now version 2. Version 1 documents load and migrate automaticall
 Choose **Export → Export Renri MBS (experimental)…** for an eligible circuit. The writer creates actual Shift-JIS, CRLF `mbs-file 3winv.1` records based on the developer's official Standard 8.84 samples. It supports complete series NO/NC rungs with OUT/TIM instructions, and the one-cell self-holding branch in Exercise 10. Unsupported layouts, non-100 ms timer presets, and unsupported comment characters are rejected. This is not a general Renri importer or a verified compatibility claim.
 
 The Exercise 10 export is `output/exercise10/KADAI10.MBS`. Read `output/exercise10/RENRI-COMPATIBILITY.md` for format provenance, supported scope, and the required Renri-side open/compile/run check. No Windows/Renri runtime is available on this Mac, so that final check remains outstanding.
+
+
+## CTU counters and eight-flash crossing
+
+CTU counters, C contacts, counter RESET, live Inspector/canvas values and CNT/SET/RST MBS export are supported. Choose **Example circuits → Eight-flash pedestrian crossing**. See [COUNTERS.md](COUNTERS.md) for scan/reset semantics, timer units, the complete example, changed files and MBS export limits.
+
+
+## Wire pen, scroll zoom, PLS/PLF and worksheet 09カイ
+
+Scroll over the canvas to zoom at the pointer. Drag blank space to pan. Use **W** to draw connections by dragging or clicking two terminals; **Shift** changes the bend. Symbols support click placement and dragging from the sidebar. **P/F** select rising/falling pulse coils. Branch networks can now export through generated internal M relays. See [DRAWING-AND-09KAI.md](DRAWING-AND-09KAI.md) for controls, the reviewed 09カイ circuit, timing results and export limits.
+
+
+## Live timing diagram
+
+Simulation now includes a timing chart for X/M/T/C/Y devices, with timer counting hatching, counter events and brief pulses. Expand it or drag the ladder/chart divider to resize it. Pause preserves history; Reset clears it. The cursor includes panning, so the separate Pan tool and H shortcut have been removed. See [TIMING-DIAGRAM.md](TIMING-DIAGRAM.md).
+
+
+## Renri comments
+
+MBS exports retain device descriptions and per-symbol notes, including through branch conversion. Distinct descriptions/notes become separate comment lines; ASCII spaces/tabs are rendered as full-width spaces. See [RENRI-COMMENTS.md](RENRI-COMMENTS.md).

@@ -24,7 +24,7 @@ enum DiagramRenderer {
     static let accent = Color(red: 0.05, green: 0.57, blue: 0.51)
     static func draw(_ circuit: Circuit, context: inout GraphicsContext, dark: Bool, grid: Bool,
                      selection: Set<UUID> = [], offset: GridPoint = .init(0, 0),
-                     issues: Set<UUID> = [], energized: Set<UUID> = [], visible: CGRect? = nil) {
+                     issues: Set<UUID> = [], energized: Set<UUID> = [], counters: [String: CounterState] = [:], visible: CGRect? = nil) {
         let ink = dark ? Color(red: 0.84, green: 0.88, blue: 0.89) : Color(red: 0.17, green: 0.23, blue: 0.26)
         let muted = dark ? Color.white.opacity(0.35) : Color.black.opacity(0.32)
         let size = DiagramMetrics.size(for: circuit)
@@ -76,7 +76,7 @@ enum DiagramRenderer {
             }
             let color = energized.contains(element.id) ? Color.green : selected ? accent : ink
             drawSymbol(element.kind, from: start, to: end, context: &context, color: color,
-                       presetMilliseconds: element.kind == .timer ? element.presetMilliseconds : nil)
+                       presetMilliseconds: element.kind == .timer ? element.presetMilliseconds : nil, counterPreset: element.kind == .counter ? element.presetCount : nil, counterCurrent: counters[element.label]?.current)
             if !element.kind.isWire {
                 context.draw(Text(element.label).font(.system(size: 12, weight: .semibold, design: .monospaced)).foregroundColor(selected ? accent : ink),
                              at: CGPoint(x: (start.x + end.x) / 2, y: start.y - 28))
@@ -99,14 +99,17 @@ enum DiagramRenderer {
         }
     }
 
-    static func drawSymbol(_ kind: SymbolKind, from start: CGPoint, to end: CGPoint, context: inout GraphicsContext, color: Color, presetMilliseconds: Int? = nil) {
+    static func drawSymbol(_ kind: SymbolKind, from start: CGPoint, to end: CGPoint, context: inout GraphicsContext, color: Color, presetMilliseconds: Int? = nil, counterPreset: Int? = nil, counterCurrent: Int? = nil) {
         var path = Path()
         func line(_ a: CGPoint, _ b: CGPoint) { path.move(to: a); path.addLine(to: b) }
         let cx = (start.x + end.x) / 2, y = start.y
-        if kind == .timer {
+        if kind == .timer || kind == .counter {
             line(start, CGPoint(x: cx - 25, y: y)); line(CGPoint(x: cx + 25, y: y), end)
             path.addRoundedRect(in: CGRect(x: cx - 25, y: y - 17, width: 50, height: 34), cornerSize: CGSize(width: 3, height: 3))
-            context.draw(Text("TON").font(.system(size: 9, weight: .semibold, design: .monospaced)).foregroundColor(color), at: CGPoint(x: cx, y: presetMilliseconds == nil ? y : y - 6))
+            context.draw(Text(kind == .counter ? "CTU" : "TON").font(.system(size: 9, weight: .semibold, design: .monospaced)).foregroundColor(color), at: CGPoint(x: cx, y: presetMilliseconds == nil && counterPreset == nil ? y : y - 6))
+            if let counterPreset {
+                context.draw(Text(counterCurrent.map { "\($0)/K\(counterPreset)" } ?? "K\(counterPreset)").font(.system(size: 9, design: .monospaced)).foregroundColor(color), at: CGPoint(x: cx, y: y + 8))
+            }
             if let presetMilliseconds {
                 context.draw(Text(String(format: "%g s", Double(presetMilliseconds) / 1_000)).font(.system(size: 9, design: .monospaced)).foregroundColor(color), at: CGPoint(x: cx, y: y + 8))
             }
@@ -123,7 +126,7 @@ enum DiagramRenderer {
             path.move(to: CGPoint(x: cx + 10, y: y - 17))
             path.addQuadCurve(to: CGPoint(x: cx + 10, y: y + 17), control: CGPoint(x: cx + 24, y: y))
             if kind != .coil {
-                context.draw(Text(kind == .setCoil ? "S" : "R").font(.system(size: 12, weight: .semibold, design: .monospaced)).foregroundColor(color), at: CGPoint(x: cx, y: y))
+                context.draw(Text(kind == .risingPulse ? "↑" : kind == .fallingPulse ? "↓" : kind == .setCoil ? "S" : "R").font(.system(size: 12, weight: .semibold, design: .monospaced)).foregroundColor(color), at: CGPoint(x: cx, y: y))
             }
         }
         context.stroke(path, with: .color(color), style: StrokeStyle(lineWidth: 1.8, lineCap: .round, lineJoin: .round))

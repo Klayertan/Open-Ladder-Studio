@@ -12,7 +12,7 @@ final class CircuitEditingTests: XCTestCase {
         let elements = SymbolKind.allCases.enumerated().map { index, kind in
             LadderElement(kind: kind, position: .init(1, index))
         }
-        let circuit = Circuit(elements: elements)
+        let circuit = Circuit(rows: max(10, SymbolKind.allCases.count + 1), elements: elements)
         XCTAssertEqual(try Circuit.decode(circuit.encoded()), circuit)
     }
     func testOverlapRejectedAcrossDifferentHorizontalKinds() throws {

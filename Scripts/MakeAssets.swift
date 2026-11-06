@@ -7,6 +7,10 @@ try FileManager.default.createDirectory(at: examples, withIntermediateDirectorie
 try ExampleCircuits.sealIn.encoded().write(to: examples.appendingPathComponent("Motor-seal-in.ladder"))
 try ExampleCircuits.setReset.encoded().write(to: examples.appendingPathComponent("Set-reset-memory.ladder"))
 try ExampleCircuits.trafficLight.encoded().write(to: examples.appendingPathComponent("Exercise-10-Traffic-Light.ladder"))
+try ExampleCircuits.pedestrianCrossing.encoded().write(to: examples.appendingPathComponent("Eight-flash-pedestrian.ladder"))
+try RenriMBSExporter.export(ExampleCircuits.pedestrianCrossing, fileName: "PEDESTRIAN.MBS").write(to: examples.appendingPathComponent("PEDESTRIAN.MBS"))
+let worksheet = try Circuit.decode(Data(contentsOf: examples.appendingPathComponent("09-kai-pedestrian.ladder")))
+try RenriMBSExporter.export(worksheet, fileName: "09KAI.MBS").write(to: examples.appendingPathComponent("09-kai-pedestrian.MBS"))
 let iconSet = root.appendingPathComponent("build/AppIcon.iconset")
 try FileManager.default.createDirectory(at: iconSet, withIntermediateDirectories: true)
 for size in [16, 32, 128, 256, 512] {

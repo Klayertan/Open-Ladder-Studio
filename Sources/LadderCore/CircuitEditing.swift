@@ -6,6 +6,46 @@ public enum CircuitEditing {
         var result = circuit; result.elements += elements
         return try result.checked()
     }
+    /// Place a symbol directly onto a wire without disturbing neighbouring connections.
+    public static func place(_ element: LadderElement, in circuit: Circuit) throws -> Circuit {
+        var result = circuit
+        if !element.kind.isWire {
+            result.elements.removeAll { $0.kind == .horizontalWire && $0.position == element.position }
+        }
+        return try insert([element], into: result)
+    }
+
+    /// Orthogonal terminal-to-terminal route. Existing symbols/wires and rails are reused.
+    public static func wirePath(from start: GridPoint, to end: GridPoint, horizontalFirst: Bool = true, in circuit: Circuit) throws -> [LadderElement] {
+        func valid(_ p: GridPoint) -> Bool {
+            (0...circuit.columns).contains(p.column) && (0..<circuit.rows).contains(p.row)
+        }
+        guard valid(start), valid(end) else { throw CircuitError.outOfBounds }
+        var path: [LadderElement] = []
+        func horizontal(_ a: GridPoint, _ b: GridPoint) {
+            for column in min(a.column,b.column)..<max(a.column,b.column) {
+                path.append(.init(kind: .horizontalWire, position: .init(column,a.row)))
+            }
+        }
+        func vertical(_ a: GridPoint, _ b: GridPoint) {
+            // The power rails already connect all their row terminals.
+            guard a.column > 0 && a.column < circuit.columns else { return }
+            for row in min(a.row,b.row)..<max(a.row,b.row) {
+                path.append(.init(kind: .verticalWire, position: .init(a.column,row)))
+            }
+        }
+        let bend = horizontalFirst ? GridPoint(end.column,start.row) : GridPoint(start.column,end.row)
+        if horizontalFirst { horizontal(start,bend); vertical(bend,end) }
+        else { vertical(start,bend); horizontal(bend,end) }
+        return path
+    }
+
+    public static func connect(from start: GridPoint, to end: GridPoint, horizontalFirst: Bool = true, in circuit: Circuit) throws -> Circuit {
+        let path = try wirePath(from: start,to: end,horizontalFirst: horizontalFirst,in: circuit)
+        let additions = path.filter { segment in !circuit.elements.contains { $0.overlaps(segment) } }
+        return try insert(additions,into: circuit)
+    }
+
     public static func remove(_ ids: Set<UUID>, from circuit: Circuit) -> Circuit {
         var result = circuit; result.elements.removeAll { ids.contains($0.id) }; return result
     }
@@ -18,7 +58,7 @@ public enum CircuitEditing {
         }
         return try result.checked()
     }
-    public static func update(_ id: UUID, label: String, comment: String, timerPresetMilliseconds: Int? = nil, in circuit: Circuit) throws -> Circuit {
+    public static func update(_ id: UUID, label: String, comment: String, timerPresetMilliseconds: Int? = nil, counterPreset: Int? = nil, in circuit: Circuit) throws -> Circuit {
         var result = circuit
         guard let i = result.elements.firstIndex(where: { $0.id == id }) else { return result }
         let normalized = label.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -28,6 +68,7 @@ public enum CircuitEditing {
         result.elements[i].label = result.elements[i].kind.isWire ? "" : normalized
         result.elements[i].comment = String(comment.prefix(240))
         if result.elements[i].kind == .timer, let timerPresetMilliseconds { result.elements[i].timerPresetMilliseconds = timerPresetMilliseconds }
+        if result.elements[i].kind == .counter, let counterPreset { result.elements[i].counterPreset = counterPreset }
         return try result.checked()
     }
     /// Edits the shared definition of an address; every symbol with that label follows it.

@@ -101,3 +101,62 @@ final class EditorIntegrationTests: XCTestCase {
         undo.undo(); XCTAssertEqual(document.circuit, previous)
     }
 }
+
+extension EditorIntegrationTests {
+    @MainActor func testCounterInspectorEditingAndSimulationReset() throws {
+        let document = LadderDocument(circuit: ExampleCircuits.pedestrianCrossing)
+        let model = EditorViewModel(document: document), undo = UndoManager()
+        model.undoManager = undo
+        let counter = try XCTUnwrap(document.circuit.elements.first { $0.kind == .counter })
+        model.selection = [counter.id]
+        undo.beginUndoGrouping()
+        model.updateSelected(label:"C0",note:"",counterPreset:3)
+        undo.endUndoGrouping()
+        XCTAssertEqual(model.selectedElements.first?.presetCount,3)
+        undo.undo()
+        XCTAssertEqual(model.selectedElements.first?.presetCount,8)
+        XCTAssertTrue(model.prepareSimulation())
+        model.pressInput("X0")
+        model.advanceSimulation(milliseconds:23000)
+        XCTAssertEqual(model.simulation?.counters["C0"]?.current,1)
+        model.resetSimulation()
+        XCTAssertEqual(model.simulation?.counters["C0"]?.current,0)
+        XCTAssertFalse(model.simulation?["C0"] ?? true)
+        XCTAssertEqual(try document.snapshot(contentType:.ladderProject),document.circuit)
+    }
+}
+
+extension EditorIntegrationTests {
+    @MainActor func testScrollZoomKeepsPointerAnchoredAndClampsScale() {
+        let model = EditorViewModel(document:LadderDocument())
+        model.zoom = 1; model.pan = .init(width:20,height:24)
+        let pointer = CGPoint(x:400,y:300)
+        let before = CGPoint(x:(pointer.x-model.pan.width)/model.zoom,y:(pointer.y-model.pan.height)/model.zoom)
+        model.scrollZoom(delta:20,at:pointer)
+        XCTAssertGreaterThan(model.zoom,1)
+        XCTAssertEqual((pointer.x-model.pan.width)/model.zoom,before.x,accuracy:0.000001)
+        XCTAssertEqual((pointer.y-model.pan.height)/model.zoom,before.y,accuracy:0.000001)
+        for _ in 0..<20 { model.scrollZoom(delta:100,at:pointer) }
+        XCTAssertEqual(model.zoom,2.5)
+        for _ in 0..<20 { model.scrollZoom(delta:-100,at:pointer) }
+        XCTAssertEqual(model.zoom,0.25)
+    }
+    @MainActor func testWireGestureCommitsAsOneUndoStepAndPalettePlacementReplacesWire() throws {
+        let document = LadderDocument()
+        let model = EditorViewModel(document:document), undo = UndoManager()
+        model.undoManager = undo
+        undo.beginUndoGrouping()
+        model.connect(from:.init(1,1),to:.init(4,3),horizontalFirst:true)
+        undo.endUndoGrouping()
+        XCTAssertEqual(document.circuit.elements.count,5)
+        let wired = document.circuit
+        undo.undo(); XCTAssertTrue(document.circuit.elements.isEmpty)
+        undo.redo(); XCTAssertEqual(document.circuit,wired)
+        undo.beginUndoGrouping()
+        model.placeSymbol(.risingPulse,at:.init(2,1))
+        undo.endUndoGrouping()
+        XCTAssertEqual(document.circuit.elements.count,5)
+        XCTAssertEqual(model.selectedElements.first?.kind,.risingPulse)
+        undo.undo(); XCTAssertEqual(document.circuit,wired)
+    }
+}

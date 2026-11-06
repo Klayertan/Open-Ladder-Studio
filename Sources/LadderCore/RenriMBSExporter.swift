@@ -16,13 +16,17 @@ public enum RenriExportError: Error, LocalizedError {
 /// developer's official srenri884 distribution. This is NOT an assertion of
 /// runtime compatibility. A file must still be opened/compiled in Renri.
 ///
-/// Supported: complete series rungs (NO/NC, OUT, 100 ms TIM) and the single-cell
-/// NO self-holding branch used by Exercise 10. Other topologies fail explicitly.
+/// Supported: complete series rungs (NO/NC, OUT, SET, RST, PLS, PLF, CNT, 100 ms TIM) and the single-cell
+/// NO self-holding branch used by Exercise 10. Other branch graphs are lowered
+/// to series rungs using collision-free helper M relays (see RenriLogicLowering).
 /// The holding rung is normalized to (Start OR Hold) AND Stop because the known
 /// official branch template places the stop contact after the join. This is
 /// electrically equivalent for the supported pure contacts.
 public enum RenriMBSExporter {
     public static let compatibilityVerifiedInRenri = false
+    // Official commented contacts/coils use 0x8801A / 0x8C078 rather than
+    // 0x801A / 0xC078. Text records alone do not enable their display.
+    static let commentDisplayFlag: UInt32 = 0x00080000
     private static let width = 16
     private struct Row {
         var layout: [UInt32]
@@ -31,6 +35,13 @@ public enum RenriMBSExporter {
     }
 
     public static func export(_ circuit: Circuit, fileName: String = "KADAI10.MBS") throws -> Data {
+        do { return try exportSupported(circuit,fileName:fileName) }
+        catch RenriExportError.unsupportedLayout {
+            return try exportSupported(loweringBranches(circuit),fileName:fileName)
+        }
+    }
+
+    private static func exportSupported(_ circuit: Circuit, fileName: String) throws -> Data {
         _ = try circuit.checked()
         guard !circuit.elements.isEmpty, !CircuitValidation.issues(in: circuit).contains(where: { $0.severity == .error }),
               !fileName.contains("\n"), !fileName.contains("\r") else { throw RenriExportError.unsupportedLayout }
@@ -38,11 +49,11 @@ public enum RenriMBSExporter {
         let outputs = circuit.elements.filter(\.kind.isOutput).sorted { $0.position.row < $1.position.row }
         guard Set(outputs.map { $0.position.row }).count == outputs.count else { throw RenriExportError.unsupportedLayout }
         for output in outputs {
-            guard output.position.column == circuit.columns - 1, output.kind == .coil || output.kind == .timer else { throw RenriExportError.unsupportedLayout }
+            guard output.position.column == circuit.columns - 1, [SymbolKind.coil, .timer, .counter, .setCoil, .resetCoil, .risingPulse, .fallingPulse].contains(output.kind) else { throw RenriExportError.unsupportedLayout }
             let line = circuit.elements.filter { $0.position.row == output.position.row && $0.kind != .verticalWire }.sorted { $0.position.column < $1.position.column }
             guard line.count == circuit.columns, line.enumerated().allSatisfy({ $0.offset == $0.element.position.column }) else { throw RenriExportError.unsupportedLayout }
             let contacts = line.filter { !$0.kind.isWire && !$0.kind.isOutput }
-            guard (1...9).contains(contacts.count), contacts.allSatisfy({ $0.kind == .normallyOpen || $0.kind == .normallyClosed }) else { throw RenriExportError.unsupportedLayout }
+            guard (0...9).contains(contacts.count), contacts.allSatisfy({ $0.kind == .normallyOpen || $0.kind == .normallyClosed }) else { throw RenriExportError.unsupportedLayout }
             let verticals = circuit.elements.filter { $0.kind == .verticalWire && $0.position.row == output.position.row }
             if verticals.isEmpty {
                 rows.append(try series(contacts: contacts, output: output, in: circuit))
@@ -62,7 +73,7 @@ public enum RenriMBSExporter {
                 rows.append(main)
                 var branch = emptyRow()
                 branch.layout[0] = 0x0000801A; branch.layout[1] = 0x00000002
-                branch.data[0] = try device(hold.label); branch.comments[0] = circuit.displayComment(for: hold)
+                branch.data[0] = try device(hold.label); branch.comments[0] = exportComment(for: hold, in: circuit)
                 rows.append(branch)
                 consumed.formUnion(lower.map(\.id))
                 consumed.formUnion(verticals.map(\.id))
@@ -76,6 +87,11 @@ public enum RenriMBSExporter {
         end.layout[11] = 0x00006408; end.layout[12] = 0x00000010
         rows.append(end)
 
+        for row in rows.indices {
+            for cell in rows[row].comments.indices where !rows[row].comments[cell].isEmpty {
+                rows[row].layout[cell] |= commentDisplayFlag
+            }
+        }
         var lines = ["mbs-file 3winv.1", fileName]
         for (i, row) in rows.enumerated() {
             lines.append(String(format: "%05d  ", i + 1) + rle(row.layout) + " DDDDDDDDD " + rle(row.data) + " ")
@@ -99,6 +115,7 @@ public enum RenriMBSExporter {
         case "Y": prefix = 0x10000000
         case "M": prefix = 0x20000000
         case "T": prefix = 0x40000000
+        case "C": prefix = 0x50000000
         default: throw RenriExportError.unsupportedDevice
         }
         // Renri X/Y addresses are hexadecimal; T/M addresses are decimal.
@@ -112,11 +129,11 @@ public enum RenriMBSExporter {
         var row = emptyRow()
         for (column, contact) in contacts.enumerated() {
             row.layout[column] = (contact.kind == .normallyOpen ? 0x00008010 : 0x00008020) | (column == 0 ? 0xA : 0x8)
-            row.data[column] = try device(contact.label); row.comments[column] = circuit.displayComment(for: contact)
+            row.data[column] = try device(contact.label); row.comments[column] = exportComment(for: contact, in: circuit)
         }
-        let wireEnd = output.kind == .timer ? 10 : 11
+        let wireEnd = output.kind == .coil ? 11 : 10
         for i in contacts.count..<wireEnd { row.layout[i] = 0x000000B9 }
-        row.data[11] = try device(output.label); row.comments[11] = circuit.displayComment(for: output)
+        row.data[11] = try device(output.label); row.comments[11] = exportComment(for: output, in: circuit)
         if output.kind == .timer {
             guard output.label.hasPrefix("T"), output.presetMilliseconds % 100 == 0,
                   (1...9_999).contains(output.presetMilliseconds / 100) else { throw RenriExportError.unsupportedTimer }
@@ -124,6 +141,17 @@ public enum RenriMBSExporter {
             // K constants are packed decimal digits. Verified against timer.MBS
             // (K10 serialized as 000000010) and its generated timer.ino (10 * 100000 us).
             row.data[12] = UInt32(String(output.presetMilliseconds / 100), radix: 16)!
+        } else if output.kind == .counter {
+            guard output.label.hasPrefix("C") else { throw RenriExportError.unsupportedDevice }
+            // Official ESP32sample/cnt.MBS row 7: CNT C10 K5.
+            row.layout[10] = 0x00020008; row.layout[11] = 0x0021C098; row.layout[12] = 0x00000036
+            row.data[12] = UInt32(String(output.presetCount), radix: 16)!
+        } else if output.kind == .setCoil || output.kind == .resetCoil || output.kind.isPulse {
+            guard output.label.hasPrefix("M") || output.label.hasPrefix("Y") || (output.kind == .resetCoil && output.label.hasPrefix("C")) else { throw RenriExportError.unsupportedDevice }
+            // Official cnt.MBS row 8 and M5Sample/setrst.MBS rows 1/3.
+            row.layout[10] = 0x00040C08; row.layout[11] = 0x0004C408
+            // Official ESP32sample/altplsplf.MBS: PLS 0x1D, PLF 0x1E.
+            row.layout[12] = output.kind == .risingPulse ? 0x1D : output.kind == .fallingPulse ? 0x1E : output.kind == .setCoil ? 0x1C : 0x1F
         } else {
             guard output.label.hasPrefix("M") || output.label.hasPrefix("Y") else { throw RenriExportError.unsupportedDevice }
             row.layout[11] = 0x0000C078; row.layout[12] = 0x0000000F
@@ -139,6 +167,16 @@ public enum RenriMBSExporter {
         }
         return tokens.joined(separator: " ")
     }
+    /// Renri has per-cell comment records; retain the shared device description
+    /// and any distinct per-symbol note as separate display lines.
+    private static func exportComment(for element: LadderElement, in circuit: Circuit) -> String {
+        let device = circuit.device(element.label).comment
+        let note = element.comment
+        if device.isEmpty { return note }
+        if note.isEmpty || note == device { return device }
+        return device + "\n" + note
+    }
+
     private static func commentRLE(_ comments: [String]) throws -> String {
         var tokens: [String] = [], i = 0
         while i < comments.count {
@@ -147,10 +185,17 @@ public enum RenriMBSExporter {
                 while i + count < comments.count && comments[i + count].isEmpty && count < 16 { count += 1 }
                 tokens.append(String(format: "%X", count - 1)); i += count
             } else {
-                // A literal space/backslash is a format delimiter; reject rather
-                // than silently corrupt an exported comment.
-                guard !comments[i].contains(where: { $0.isWhitespace || $0 == "\\" }) else { throw RenriExportError.unencodableComment }
-                tokens.append("0" + comments[i] + "\\\\"); i += 1
+                // Official samples use doubled backslashes between comment lines
+                // (e.g. システム\\初期設定\\). Whitespace token delimiters are
+                // rendered as Japanese full-width spaces, retaining readable words.
+                let comment = comments[i].replacingOccurrences(of: "\r\n", with: "\n").replacingOccurrences(of: "\r", with: "\n")
+                guard !comment.contains("\\"), !comment.unicodeScalars.contains(where: {
+                    CharacterSet.controlCharacters.contains($0) && $0 != "\n" && $0 != "\t"
+                }) else { throw RenriExportError.unencodableComment }
+                let lines = comment.components(separatedBy: "\n").map {
+                    $0.replacingOccurrences(of: " ", with: "　").replacingOccurrences(of: "\t", with: "　")
+                }
+                tokens.append("0" + lines.joined(separator: "\\\\") + "\\\\"); i += 1
             }
         }
         return tokens.joined(separator: " ")

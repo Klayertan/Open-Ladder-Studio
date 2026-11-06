@@ -8,16 +8,18 @@ public struct GridPoint: Codable, Hashable, Sendable {
 }
 
 public enum SymbolKind: String, Codable, CaseIterable, Sendable {
-    case normallyOpen, normallyClosed, coil, setCoil, resetCoil, horizontalWire, verticalWire, timer
+    case normallyOpen, normallyClosed, coil, setCoil, resetCoil, horizontalWire, verticalWire, timer, counter, risingPulse, fallingPulse
 
     public var isWire: Bool { self == .horizontalWire || self == .verticalWire }
-    public var isOutput: Bool { self == .coil || self == .setCoil || self == .resetCoil || self == .timer }
+    public var isOutput: Bool { self == .coil || self == .setCoil || self == .resetCoil || self == .timer || self == .counter || isPulse }
+    public var isPulse: Bool { self == .risingPulse || self == .fallingPulse }
     public var defaultLabel: String {
         switch self {
         case .normallyOpen, .normallyClosed: "X0"
         case .coil: "Y0"
-        case .setCoil, .resetCoil: "M0"
+        case .setCoil, .resetCoil, .risingPulse, .fallingPulse: "M0"
         case .timer: "T0"
+        case .counter: "C0"
         case .horizontalWire, .verticalWire: ""
         }
     }
@@ -54,12 +56,15 @@ public struct LadderElement: Codable, Identifiable, Hashable, Sendable {
     public var label: String
     /// Per-symbol note. When empty, the device comment is shown instead.
     public var comment: String
+    public var counterPreset: Int?
+    public var presetCount: Int { counterPreset ?? 8 }
     public var timerPresetMilliseconds: Int?
     public var presetMilliseconds: Int { timerPresetMilliseconds ?? 1_000 }
-    public init(id: UUID = UUID(), kind: SymbolKind, position: GridPoint, label: String? = nil, comment: String = "", timerPresetMilliseconds: Int? = nil) {
+    public init(id: UUID = UUID(), kind: SymbolKind, position: GridPoint, label: String? = nil, comment: String = "", timerPresetMilliseconds: Int? = nil, counterPreset: Int? = nil) {
         self.id = id; self.kind = kind; self.position = position
         self.label = label ?? kind.defaultLabel; self.comment = comment
         self.timerPresetMilliseconds = timerPresetMilliseconds
+        self.counterPreset = counterPreset
     }
     public var end: GridPoint {
         position.offset(columns: kind == .verticalWire ? 0 : 1, rows: kind == .verticalWire ? 1 : 0)
@@ -135,6 +140,7 @@ public struct Circuit: Codable, Equatable, Sendable {
         var occupied = Set<String>()
         for e in elements {
             if e.kind == .timer && !(1...86_400_000).contains(e.presetMilliseconds) { throw CircuitError.invalidTimerPreset }
+            if e.kind == .counter && !(1...32_767).contains(e.presetCount) { throw CircuitError.invalidCounterPreset }
             let key = "\(e.position.column),\(e.position.row),\(e.kind == .verticalWire)"
             guard occupied.insert(key).inserted else { throw CircuitError.overlap }
         }
@@ -153,7 +159,7 @@ public struct Circuit: Codable, Equatable, Sendable {
 }
 
 public enum CircuitError: Error, LocalizedError, Equatable {
-    case overlap, outOfBounds, invalidDimensions, duplicateIdentifier, unsupportedVersion(Int), invalidLabel, noRoomForPaste, unsupportedImporter, invalidTimerPreset
+    case overlap, outOfBounds, invalidDimensions, duplicateIdentifier, unsupportedVersion(Int), invalidLabel, noRoomForPaste, unsupportedImporter, invalidTimerPreset, invalidCounterPreset
     public var errorDescription: String? {
         switch self {
         case .overlap: String(localized: "error.overlap", bundle: .main)
@@ -164,6 +170,7 @@ public enum CircuitError: Error, LocalizedError, Equatable {
         case .invalidLabel: String(localized: "error.label", bundle: .main)
         case .noRoomForPaste: String(localized: "error.paste", bundle: .main)
         case .unsupportedImporter: String(localized: "error.importer", bundle: .main)
+        case .invalidCounterPreset: String(localized: "error.counterPreset", bundle: .main)
         case .invalidTimerPreset: String(localized: "error.timerPreset", bundle: .main)
         }
     }

@@ -1,0 +1,1751 @@
+{
+  "columns": 10,
+  "devices": {
+    "X001": {
+      "comment": "歩道PB1"
+    },
+    "X002": {
+      "comment": "歩道PB2"
+    },
+    "M0": {
+      "comment": "動作中・自己保持"
+    },
+    "T0": {
+      "comment": "車道青5秒"
+    },
+    "T1": {
+      "comment": "車道黄2秒"
+    },
+    "T2": {
+      "comment": "全赤3秒"
+    },
+    "T3": {
+      "comment": "歩道青12秒"
+    },
+    "T4": {
+      "comment": "点滅OFF0.5秒"
+    },
+    "T5": {
+      "comment": "点滅ON0.5秒"
+    },
+    "C0": {
+      "comment": "青点滅8回"
+    },
+    "T6": {
+      "comment": "全赤3秒"
+    },
+    "Y000": {
+      "comment": "車道青",
+      "lampColor": "green"
+    },
+    "Y001": {
+      "comment": "車道黄",
+      "lampColor": "yellow"
+    },
+    "Y002": {
+      "comment": "車道赤",
+      "lampColor": "red"
+    },
+    "Y003": {
+      "comment": "歩道赤",
+      "lampColor": "red"
+    },
+    "Y004": {
+      "comment": "歩道青",
+      "lampColor": "green"
+    }
+  },
+  "elements": [
+    {
+      "comment": "",
+      "id": "2B34BC39-414C-4FB0-A3BA-07C185EE09B8",
+      "kind": "coil",
+      "label": "M0",
+      "position": {
+        "column": 9,
+        "row": 1
+      }
+    },
+    {
+      "comment": "",
+      "id": "78B6FEE6-A378-4BCD-9682-5B508A0F3FFB",
+      "kind": "normallyOpen",
+      "label": "X001",
+      "position": {
+        "column": 2,
+        "row": 0
+      }
+    },
+    {
+      "comment": "",
+      "id": "B0419F5E-8BE9-4137-AAB5-D1CE0B07E728",
+      "kind": "normallyOpen",
+      "label": "X002",
+      "position": {
+        "column": 2,
+        "row": 1
+      }
+    },
+    {
+      "comment": "",
+      "id": "C6DD7AA0-C22F-4991-ABFB-1B75FA24A741",
+      "kind": "normallyOpen",
+      "label": "M0",
+      "position": {
+        "column": 2,
+        "row": 2
+      }
+    },
+    {
+      "comment": "",
+      "id": "8E445610-99A6-40E9-B231-FDEE9BB71AEF",
+      "kind": "verticalWire",
+      "label": "",
+      "position": {
+        "column": 2,
+        "row": 0
+      }
+    },
+    {
+      "comment": "",
+      "id": "4715819D-187B-46A8-A55B-A7EB2ADBDEA4",
+      "kind": "verticalWire",
+      "label": "",
+      "position": {
+        "column": 2,
+        "row": 1
+      }
+    },
+    {
+      "comment": "",
+      "id": "2CC78BF2-D2FB-452B-A366-48940C3A59CA",
+      "kind": "verticalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 1
+      }
+    },
+    {
+      "comment": "",
+      "id": "937BD351-4C18-4C6D-951D-6D9D61F7F2AE",
+      "kind": "verticalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 0
+      }
+    },
+    {
+      "comment": "",
+      "id": "3E60A728-66A6-48DF-BFCA-638BD55B63FF",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 1
+      }
+    },
+    {
+      "comment": "",
+      "id": "A85FD88E-E32C-4564-B637-3156250263A9",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 1
+      }
+    },
+    {
+      "comment": "",
+      "id": "B6EA21E4-E595-4912-9A8F-5E510B52310E",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 1
+      }
+    },
+    {
+      "comment": "",
+      "id": "D3F7E637-D445-4A94-A9F8-F8F08326B293",
+      "kind": "normallyClosed",
+      "label": "T6",
+      "position": {
+        "column": 4,
+        "row": 1
+      }
+    },
+    {
+      "comment": "",
+      "id": "91917B0D-D782-48F1-A857-4286C39CE8CD",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 1
+      }
+    },
+    {
+      "comment": "",
+      "id": "F77FDDB5-AE0C-42DE-AC00-1003CC9996E0",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 6,
+        "row": 1
+      }
+    },
+    {
+      "comment": "",
+      "id": "0884795A-883F-4A7F-8235-B2BA41362AF2",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 1
+      }
+    },
+    {
+      "comment": "",
+      "id": "5D09EAC1-D461-4A8E-8004-898B549E6D1D",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 1
+      }
+    },
+    {
+      "comment": "",
+      "id": "816F3E35-E520-49B3-B3E5-1AB9A6BC2B49",
+      "kind": "normallyOpen",
+      "label": "M0",
+      "position": {
+        "column": 2,
+        "row": 3
+      }
+    },
+    {
+      "comment": "",
+      "id": "9C98DC49-418D-4CED-8EC5-C6B4B74A2CF2",
+      "kind": "normallyOpen",
+      "label": "T0",
+      "position": {
+        "column": 2,
+        "row": 4
+      }
+    },
+    {
+      "comment": "",
+      "id": "5A5C8880-AD0A-4B8D-ADEB-FCAB119D00CC",
+      "kind": "normallyOpen",
+      "label": "T1",
+      "position": {
+        "column": 2,
+        "row": 5
+      }
+    },
+    {
+      "comment": "",
+      "id": "3ADE1EC0-8937-421B-8ABB-E8E2AD9A4AA4",
+      "kind": "normallyOpen",
+      "label": "T2",
+      "position": {
+        "column": 2,
+        "row": 6
+      }
+    },
+    {
+      "comment": "",
+      "id": "62C2352E-A788-44DB-B074-A9DA19621F07",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 3
+      }
+    },
+    {
+      "comment": "",
+      "id": "7F16D656-5023-46EC-B30B-927AB6B79384",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 3
+      }
+    },
+    {
+      "comment": "",
+      "id": "D3A1BF2B-7F13-4B60-B359-E88EBF067380",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 4
+      }
+    },
+    {
+      "comment": "",
+      "id": "232F0079-C6AF-4D71-A534-D7F9CA9ADA2B",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 4
+      }
+    },
+    {
+      "comment": "",
+      "id": "2EF77AD4-CAC8-4883-8302-019AA177EF05",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 5
+      }
+    },
+    {
+      "comment": "",
+      "id": "5F993A4D-A727-4963-9A8E-4D6B83C88BD5",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 5
+      }
+    },
+    {
+      "comment": "",
+      "id": "06E34F39-BD75-4C81-A38A-E6C0A43529FA",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 6
+      }
+    },
+    {
+      "comment": "",
+      "id": "8656E5FB-9D1A-4CE7-9B4A-16157EB056BE",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 6
+      }
+    },
+    {
+      "comment": "",
+      "id": "B34AD5E3-FD5A-4020-A858-ECF0C595F8C6",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 6
+      }
+    },
+    {
+      "comment": "",
+      "id": "4B42A59E-EF31-4C66-AC9E-2B1A76178DBC",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 6
+      }
+    },
+    {
+      "comment": "",
+      "id": "8546CDF2-B514-4911-846F-ED43D8959F6D",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 4,
+        "row": 6
+      }
+    },
+    {
+      "comment": "",
+      "id": "2E532410-4D1E-4F62-82DA-EB95C99FBE2A",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 6
+      }
+    },
+    {
+      "comment": "",
+      "id": "4413D389-3B21-4878-AF62-BC5038883D8F",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 6,
+        "row": 6
+      }
+    },
+    {
+      "comment": "",
+      "id": "4B1CCBA0-F816-4A8E-9F55-9D0481E32C4E",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 5
+      }
+    },
+    {
+      "comment": "",
+      "id": "DB4F7EB6-0B2C-465B-BB8F-C631C27EC657",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 4,
+        "row": 5
+      }
+    },
+    {
+      "comment": "",
+      "id": "E5243327-60D0-42F9-9D1D-E79EB8413630",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 5
+      }
+    },
+    {
+      "comment": "",
+      "id": "BF591DFB-77F1-4589-8125-4DC710EB7530",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 6,
+        "row": 5
+      }
+    },
+    {
+      "comment": "",
+      "id": "4EB06A68-B354-40D9-A813-8BE20E0B366D",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 5
+      }
+    },
+    {
+      "comment": "",
+      "id": "19FCD4CB-73D6-4768-B06A-96B15C7B0927",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 4
+      }
+    },
+    {
+      "comment": "",
+      "id": "071A4626-4771-4667-9191-FD7B10E45DB2",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 3
+      }
+    },
+    {
+      "comment": "",
+      "id": "EA279B82-8EE1-4B49-A222-13D3EA26E1BF",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 6,
+        "row": 3
+      }
+    },
+    {
+      "comment": "",
+      "id": "D9E647A9-12A8-411A-9994-EBDF27AC5C8A",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 6,
+        "row": 4
+      }
+    },
+    {
+      "comment": "",
+      "id": "75AA68FB-ADD7-49BA-88C0-3768A8F6E5C1",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 4
+      }
+    },
+    {
+      "comment": "",
+      "id": "213DAEB2-FA99-4F6C-A8EF-696200BA9B07",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 3
+      }
+    },
+    {
+      "comment": "",
+      "id": "04D2524C-03A6-4087-BC0E-A9EBEEC6E623",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 4,
+        "row": 3
+      }
+    },
+    {
+      "comment": "",
+      "id": "E12AA519-E0E8-4092-9D8D-4975DC6157BA",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 4,
+        "row": 4
+      }
+    },
+    {
+      "comment": "",
+      "id": "E056867C-C47C-4329-8C92-88FD1D592080",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 4
+      }
+    },
+    {
+      "comment": "",
+      "id": "02600F88-73E8-4BDD-95E6-8B850F6C0318",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 3
+      }
+    },
+    {
+      "comment": "",
+      "id": "C573F7F8-77B7-487A-BCB8-CFDC4E3CE072",
+      "kind": "normallyOpen",
+      "label": "T3",
+      "position": {
+        "column": 2,
+        "row": 7
+      }
+    },
+    {
+      "comment": "",
+      "id": "B2DA7377-3C36-4AE9-B925-506AD8C8E515",
+      "kind": "normallyOpen",
+      "label": "T4",
+      "position": {
+        "column": 2,
+        "row": 8
+      }
+    },
+    {
+      "comment": "",
+      "id": "A2AB35D8-B3DB-47FF-8E98-04EC534CD3FD",
+      "kind": "normallyClosed",
+      "label": "T5",
+      "position": {
+        "column": 4,
+        "row": 7
+      }
+    },
+    {
+      "comment": "",
+      "id": "7F0862A1-FEDF-493B-8D35-69A2843FBC22",
+      "kind": "normallyClosed",
+      "label": "C0",
+      "position": {
+        "column": 4,
+        "row": 8
+      }
+    },
+    {
+      "comment": "",
+      "id": "63CE9997-2057-4151-A58D-217B9F2A3EB2",
+      "kind": "normallyClosed",
+      "label": "C0",
+      "position": {
+        "column": 6,
+        "row": 7
+      }
+    },
+    {
+      "comment": "",
+      "id": "3B03BDC7-481F-404A-A81B-B0311D0B414C",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 7
+      }
+    },
+    {
+      "comment": "",
+      "id": "1F747CF2-E3C1-431E-8B3C-C8EB65E73FCE",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 7
+      }
+    },
+    {
+      "comment": "",
+      "id": "ED12F387-8899-4613-820A-6681FEE48ABE",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 7
+      }
+    },
+    {
+      "comment": "",
+      "id": "7AAE3A55-187D-40E1-81DA-6C74DD30E226",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 7
+      }
+    },
+    {
+      "comment": "",
+      "id": "CF059660-6426-47DA-A7C1-67591C3B161B",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 7
+      }
+    },
+    {
+      "comment": "",
+      "id": "3CA6C1A0-FE60-4EB7-8AE1-EAFC0362B978",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 7
+      }
+    },
+    {
+      "comment": "",
+      "id": "1050F7E5-4E2B-489A-B516-D8AA067CD397",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 8
+      }
+    },
+    {
+      "comment": "",
+      "id": "CD2BD5A9-2FF4-4D2A-BD23-6C6CB80A7A3F",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 6,
+        "row": 8
+      }
+    },
+    {
+      "comment": "",
+      "id": "806E355F-8BD4-4322-8616-EDA042E0639A",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 8
+      }
+    },
+    {
+      "comment": "",
+      "id": "FEE5174D-264D-43FB-A332-1E9015842134",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 8
+      }
+    },
+    {
+      "comment": "",
+      "id": "CA5FC554-C1A7-494C-B4DC-844E6BD46280",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 8
+      }
+    },
+    {
+      "comment": "",
+      "id": "3B081B86-F842-4E01-B6F4-5B6705A8A2B4",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 8
+      }
+    },
+    {
+      "comment": "",
+      "id": "815A4CF3-0CA8-493F-A793-690CDACA53D0",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 8
+      }
+    },
+    {
+      "comment": "",
+      "id": "E9B40791-0A90-4187-8BB1-5CF322664197",
+      "kind": "timer",
+      "label": "T0",
+      "position": {
+        "column": 9,
+        "row": 3
+      },
+      "timerPresetMilliseconds": 5000
+    },
+    {
+      "comment": "",
+      "id": "950A4ADE-753D-4C81-945D-10D9BC273B4A",
+      "kind": "timer",
+      "label": "T1",
+      "position": {
+        "column": 9,
+        "row": 4
+      },
+      "timerPresetMilliseconds": 2000
+    },
+    {
+      "comment": "",
+      "id": "A5205865-9682-44AB-BF47-99F9C0B48B01",
+      "kind": "timer",
+      "label": "T2",
+      "position": {
+        "column": 9,
+        "row": 5
+      },
+      "timerPresetMilliseconds": 3000
+    },
+    {
+      "comment": "",
+      "id": "4C7DA748-EC60-469A-9D10-2ABF05FB3C5B",
+      "kind": "timer",
+      "label": "T3",
+      "position": {
+        "column": 9,
+        "row": 6
+      },
+      "timerPresetMilliseconds": 12000
+    },
+    {
+      "comment": "",
+      "id": "A123B231-5609-4DC9-9AC8-46A6DD8615D0",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 5
+      }
+    },
+    {
+      "comment": "",
+      "id": "BD4F5118-CA42-48E1-9B00-628F9E582759",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 6
+      }
+    },
+    {
+      "comment": "",
+      "id": "78ADB8E6-A008-478E-B413-1942C4CFD6BD",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 4
+      }
+    },
+    {
+      "comment": "",
+      "id": "F7E38DAE-DCCF-4B4A-BC2D-7964BE6B7F1A",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 3
+      }
+    },
+    {
+      "comment": "",
+      "id": "FDE2AFD6-E028-4048-BE48-D13013C03C73",
+      "kind": "timer",
+      "label": "T4",
+      "position": {
+        "column": 9,
+        "row": 7
+      },
+      "timerPresetMilliseconds": 500
+    },
+    {
+      "comment": "",
+      "id": "2F4BB50F-4DC1-4468-9EFB-5D2C26963AE6",
+      "kind": "timer",
+      "label": "T5",
+      "position": {
+        "column": 9,
+        "row": 8
+      },
+      "timerPresetMilliseconds": 500
+    },
+    {
+      "comment": "",
+      "id": "7A645567-0F24-4B83-930E-D21D3AB60D6F",
+      "kind": "normallyOpen",
+      "label": "T5",
+      "position": {
+        "column": 2,
+        "row": 9
+      }
+    },
+    {
+      "comment": "",
+      "id": "3BE0F0FD-D0A1-4361-9E09-3F4131C88CAA",
+      "kind": "normallyOpen",
+      "label": "C0",
+      "position": {
+        "column": 2,
+        "row": 10
+      }
+    },
+    {
+      "comment": "",
+      "id": "EF35DAFB-77A8-4964-B1A8-3F86275BE960",
+      "kind": "normallyClosed",
+      "label": "M0",
+      "position": {
+        "column": 2,
+        "row": 11
+      }
+    },
+    {
+      "comment": "",
+      "id": "22BB9768-1395-4E30-9C90-2F311AEFD1A6",
+      "kind": "resetCoil",
+      "label": "C0",
+      "position": {
+        "column": 9,
+        "row": 11
+      }
+    },
+    {
+      "comment": "",
+      "id": "2F3BE08F-EB5B-46F0-A3F0-8FAB52F1E524",
+      "kind": "timer",
+      "label": "T6",
+      "position": {
+        "column": 9,
+        "row": 10
+      },
+      "timerPresetMilliseconds": 3000
+    },
+    {
+      "comment": "",
+      "id": "06503651-B937-45A8-BC63-E16D7033E764",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 9
+      }
+    },
+    {
+      "comment": "",
+      "id": "C3E8FC62-70F7-4845-A798-86742D4F012C",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 9
+      }
+    },
+    {
+      "comment": "",
+      "id": "D3CB135F-69FE-4481-BD0A-881AB3C38A2A",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 10
+      }
+    },
+    {
+      "comment": "",
+      "id": "01D7C3F9-A912-46B8-84F2-021D11CD7209",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 10
+      }
+    },
+    {
+      "comment": "",
+      "id": "47763CF1-0182-4FAD-8EB0-AB2D8F141BE6",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 11
+      }
+    },
+    {
+      "comment": "",
+      "id": "79B28DDD-8B11-474C-B2EA-4A77E0D36F42",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 11
+      }
+    },
+    {
+      "comment": "",
+      "id": "EF3EEE90-0477-4095-AC81-1775DBF75F5F",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 11
+      }
+    },
+    {
+      "comment": "",
+      "id": "4B6491FE-F373-44E8-B5A3-CCB1088CA1B0",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 10
+      }
+    },
+    {
+      "comment": "",
+      "id": "98901611-B290-4E89-B3B5-2AFE9AEAE88D",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 9
+      }
+    },
+    {
+      "comment": "",
+      "id": "6307BCF9-6307-4717-9622-03A2313CD3BD",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 4,
+        "row": 9
+      }
+    },
+    {
+      "comment": "",
+      "id": "48123EF3-267A-46B0-A5B4-0DA69A44D70D",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 9
+      }
+    },
+    {
+      "comment": "",
+      "id": "6B69D620-2FEE-45C0-8504-0C37B1B097B0",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 6,
+        "row": 9
+      }
+    },
+    {
+      "comment": "",
+      "id": "E0545382-8900-4725-90E6-F839C4150A53",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 9
+      }
+    },
+    {
+      "comment": "",
+      "id": "2348F46E-393B-4735-90E2-081846BC1689",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 9
+      }
+    },
+    {
+      "comment": "",
+      "id": "F53934A2-00B4-4E22-9D80-923A8C0D6A34",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 10
+      }
+    },
+    {
+      "comment": "",
+      "id": "10687CD4-9840-4D28-8609-BB711A30A9D8",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 10
+      }
+    },
+    {
+      "comment": "",
+      "id": "FAA7381C-EF5D-4CA6-84A4-561301622048",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 6,
+        "row": 10
+      }
+    },
+    {
+      "comment": "",
+      "id": "294FC9CD-63FC-4022-8B77-80A2E202959E",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 10
+      }
+    },
+    {
+      "comment": "",
+      "id": "1F33091C-5B74-412B-AC49-D13A2439A56E",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 4,
+        "row": 10
+      }
+    },
+    {
+      "comment": "",
+      "id": "34CE5C59-692F-4A1D-8515-61A47D428131",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 4,
+        "row": 11
+      }
+    },
+    {
+      "comment": "",
+      "id": "F98C2BCC-C660-46CF-83CD-F61B43166CCB",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 11
+      }
+    },
+    {
+      "comment": "",
+      "id": "001A4692-B2BE-4A37-9BBD-EAEA9B3134F4",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 6,
+        "row": 11
+      }
+    },
+    {
+      "comment": "",
+      "id": "5954509E-1B4B-4F22-830D-5A8F022127C6",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 11
+      }
+    },
+    {
+      "comment": "",
+      "id": "9ED364AE-E42E-4571-8366-0566AC3403CA",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 11
+      }
+    },
+    {
+      "comment": "",
+      "id": "74D69FE6-458D-4FF8-830E-B0246BF4A00E",
+      "kind": "normallyClosed",
+      "label": "T0",
+      "position": {
+        "column": 2,
+        "row": 12
+      }
+    },
+    {
+      "comment": "",
+      "id": "CB5DED1D-3AC8-4C35-850C-7BAC126DABA0",
+      "kind": "normallyClosed",
+      "label": "T1",
+      "position": {
+        "column": 4,
+        "row": 13
+      }
+    },
+    {
+      "comment": "",
+      "id": "5C427A76-45A2-4E65-B57D-3040B7D558A0",
+      "kind": "normallyOpen",
+      "label": "T0",
+      "position": {
+        "column": 2,
+        "row": 13
+      }
+    },
+    {
+      "comment": "",
+      "id": "8F3EE67E-1F62-4FFF-A9E5-DDDA8B5D0E44",
+      "kind": "normallyOpen",
+      "label": "T1",
+      "position": {
+        "column": 2,
+        "row": 14
+      }
+    },
+    {
+      "comment": "",
+      "id": "947F60F9-D9A0-40F6-BE51-59515B641F17",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 12
+      }
+    },
+    {
+      "comment": "",
+      "id": "AA152606-E4F3-43F8-9EFA-4F74634A696E",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 12
+      }
+    },
+    {
+      "comment": "",
+      "id": "80919BF6-D236-4EF1-9260-96E701A042B0",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 12
+      }
+    },
+    {
+      "comment": "",
+      "id": "42C9F5BD-92B1-40EC-8583-F4A1847EDD55",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 4,
+        "row": 12
+      }
+    },
+    {
+      "comment": "",
+      "id": "DC1D920B-C48E-4D29-87C2-A318FB505147",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 12
+      }
+    },
+    {
+      "comment": "",
+      "id": "E251D225-DD5E-41F7-A7E6-95032AA30A18",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 6,
+        "row": 12
+      }
+    },
+    {
+      "comment": "",
+      "id": "634407CF-B59A-4BB6-8675-9FF8318FCE07",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 12
+      }
+    },
+    {
+      "comment": "",
+      "id": "E69D00C8-B3C3-4226-A2DD-1FDFD362B287",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 12
+      }
+    },
+    {
+      "comment": "",
+      "id": "14C99806-B2EF-47DF-99C2-9E68F3C42A9A",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 13
+      }
+    },
+    {
+      "comment": "",
+      "id": "42C7C3AB-563F-441A-B30F-0A173520DBB4",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 13
+      }
+    },
+    {
+      "comment": "",
+      "id": "26B57030-8072-42C1-8558-38BE9B35BEFE",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 13
+      }
+    },
+    {
+      "comment": "",
+      "id": "86D8E0F8-1B6F-4C66-886A-BCF92D973BAE",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 14
+      }
+    },
+    {
+      "comment": "",
+      "id": "7B409E16-E30A-42AD-9825-E2651035348E",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 14
+      }
+    },
+    {
+      "comment": "",
+      "id": "85AF30E0-F259-4B5E-9A25-A7C9FA60C52F",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 14
+      }
+    },
+    {
+      "comment": "",
+      "id": "4F63EA1E-A1AB-4FC6-B9F1-946C64EE2BD9",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 14
+      }
+    },
+    {
+      "comment": "",
+      "id": "E4BAA5E2-42E8-4C3E-B7CB-1595F6B1B500",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 4,
+        "row": 14
+      }
+    },
+    {
+      "comment": "",
+      "id": "F83FF297-F614-4598-99A4-223B7ECA9EC4",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 13
+      }
+    },
+    {
+      "comment": "",
+      "id": "475EE007-4A18-4A04-8961-0DD2F1A6E98F",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 6,
+        "row": 13
+      }
+    },
+    {
+      "comment": "",
+      "id": "A2712EB6-B542-449A-BFA9-1F2997D104D1",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 13
+      }
+    },
+    {
+      "comment": "",
+      "id": "D02F24E0-09BA-4958-82B8-79DDCC3DC54D",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 13
+      }
+    },
+    {
+      "comment": "",
+      "id": "9EC76552-B849-4EA5-AE16-0B4C72994E97",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 14
+      }
+    },
+    {
+      "comment": "",
+      "id": "E534E9B2-CEE3-4A09-97A0-DFACD0E7D0DC",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 14
+      }
+    },
+    {
+      "comment": "",
+      "id": "8E925223-CA0A-4767-9CEB-3835F3254D23",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 6,
+        "row": 14
+      }
+    },
+    {
+      "comment": "",
+      "id": "726EFE4F-2C38-4D72-8E97-C7B5A238EA66",
+      "kind": "coil",
+      "label": "Y000",
+      "position": {
+        "column": 9,
+        "row": 12
+      }
+    },
+    {
+      "comment": "",
+      "id": "37B71B4E-B279-4FA9-A64F-7C12E0264C18",
+      "kind": "coil",
+      "label": "Y001",
+      "position": {
+        "column": 9,
+        "row": 13
+      }
+    },
+    {
+      "comment": "",
+      "id": "7D86B184-79DA-4B1E-B8E5-A03A025084C2",
+      "kind": "coil",
+      "label": "Y002",
+      "position": {
+        "column": 9,
+        "row": 14
+      }
+    },
+    {
+      "comment": "",
+      "id": "E60133C9-432C-466E-802C-D7A7984430C5",
+      "kind": "coil",
+      "label": "Y003",
+      "position": {
+        "column": 9,
+        "row": 15
+      }
+    },
+    {
+      "comment": "",
+      "id": "F70B4861-D27C-42A6-A258-07CF93E6EC8A",
+      "kind": "normallyClosed",
+      "label": "T2",
+      "position": {
+        "column": 2,
+        "row": 15
+      }
+    },
+    {
+      "comment": "",
+      "id": "AB7D49A8-0D4B-4B1D-8AC5-7CC0581D5C4F",
+      "kind": "normallyOpen",
+      "label": "C0",
+      "position": {
+        "column": 2,
+        "row": 16
+      }
+    },
+    {
+      "comment": "",
+      "id": "447F8E61-E6C9-45F7-A013-99D3E08B62FC",
+      "kind": "verticalWire",
+      "label": "",
+      "position": {
+        "column": 2,
+        "row": 15
+      }
+    },
+    {
+      "comment": "",
+      "id": "58D50EE0-DD60-44D4-87B6-B9456998F865",
+      "kind": "verticalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 15
+      }
+    },
+    {
+      "comment": "",
+      "id": "C7299BEA-CCFD-487A-89C6-59EB5E14829A",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 15
+      }
+    },
+    {
+      "comment": "",
+      "id": "8A22CCFB-5A0C-4AC9-89B4-C4B519884741",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 15
+      }
+    },
+    {
+      "comment": "",
+      "id": "733E77A6-08D2-4D02-AF16-4A8589A936B7",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 15
+      }
+    },
+    {
+      "comment": "",
+      "id": "8828B5F6-E8AD-4942-83BB-44F105E5F300",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 4,
+        "row": 15
+      }
+    },
+    {
+      "comment": "",
+      "id": "A59FD962-67A9-4BC7-B143-02E4DDBDB196",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 15
+      }
+    },
+    {
+      "comment": "",
+      "id": "F4158814-A5E8-4AFB-95E3-488AA080A320",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 6,
+        "row": 15
+      }
+    },
+    {
+      "comment": "",
+      "id": "376616E5-E92B-49E2-8BF0-5EAAB1D6A6CD",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 15
+      }
+    },
+    {
+      "comment": "",
+      "id": "B13DB208-9CB0-4368-B6F9-B73F7510EE7E",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 15
+      }
+    },
+    {
+      "comment": "",
+      "id": "4FE06778-B8C2-43BE-85CE-1E6A17ED3A05",
+      "kind": "normallyOpen",
+      "label": "T2",
+      "position": {
+        "column": 2,
+        "row": 17
+      }
+    },
+    {
+      "comment": "",
+      "id": "CCA8EBFF-26AB-4BA9-948C-46E18DF5F0A6",
+      "kind": "normallyOpen",
+      "label": "T3",
+      "position": {
+        "column": 2,
+        "row": 18
+      }
+    },
+    {
+      "comment": "",
+      "id": "006A16DC-2A3A-4C4D-BEA1-1AE41B77D7ED",
+      "kind": "normallyOpen",
+      "label": "T4",
+      "position": {
+        "column": 4,
+        "row": 18
+      }
+    },
+    {
+      "comment": "",
+      "id": "3DAF6F3E-4C0B-4D77-A926-F5DCA307BD1F",
+      "kind": "normallyClosed",
+      "label": "T3",
+      "position": {
+        "column": 4,
+        "row": 17
+      }
+    },
+    {
+      "comment": "",
+      "id": "CC02C4DF-0E64-4B9B-9F62-FCFE3D6BD1CF",
+      "kind": "normallyClosed",
+      "label": "T5",
+      "position": {
+        "column": 6,
+        "row": 18
+      }
+    },
+    {
+      "comment": "",
+      "id": "D4E7445C-2962-47D4-A8A2-ED62CB065D5A",
+      "kind": "normallyClosed",
+      "label": "C0",
+      "position": {
+        "column": 8,
+        "row": 18
+      }
+    },
+    {
+      "comment": "",
+      "id": "023FD18B-7C6D-4D9C-9B66-4FDBCEFBD640",
+      "kind": "coil",
+      "label": "Y004",
+      "position": {
+        "column": 9,
+        "row": 17
+      }
+    },
+    {
+      "comment": "",
+      "id": "278FF965-6A18-45C3-BB36-0540ED603B7F",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 0,
+        "row": 17
+      }
+    },
+    {
+      "comment": "",
+      "id": "DEA23A3A-4056-47BC-805D-5ADCF1475F1D",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 1,
+        "row": 17
+      }
+    },
+    {
+      "comment": "",
+      "id": "195B66E2-DCD4-48F3-A2D2-BA7193C27842",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 17
+      }
+    },
+    {
+      "comment": "",
+      "id": "EDB7FA99-58DA-4626-BB04-81B3D7E26CE9",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 17
+      }
+    },
+    {
+      "comment": "",
+      "id": "4D32D90E-08E8-491B-8368-E362DE991E41",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 6,
+        "row": 17
+      }
+    },
+    {
+      "comment": "",
+      "id": "1D4D7DA1-B683-465C-9171-749332E41466",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 17
+      }
+    },
+    {
+      "comment": "",
+      "id": "CEA4EEBB-6B41-4287-B93A-39E39FA3B0B4",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 8,
+        "row": 17
+      }
+    },
+    {
+      "comment": "",
+      "id": "14F18557-7222-43B5-A8D5-DB21888C904F",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 7,
+        "row": 18
+      }
+    },
+    {
+      "comment": "",
+      "id": "AEA3AA83-4888-4E2E-BD08-3CD6392A5DB2",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 5,
+        "row": 18
+      }
+    },
+    {
+      "comment": "",
+      "id": "E6E7D2D8-27A2-4287-9E4B-72C85111807A",
+      "kind": "horizontalWire",
+      "label": "",
+      "position": {
+        "column": 3,
+        "row": 18
+      }
+    },
+    {
+      "comment": "",
+      "id": "1056E04D-BB77-4C3A-B972-B6C20D393B11",
+      "kind": "verticalWire",
+      "label": "",
+      "position": {
+        "column": 2,
+        "row": 17
+      }
+    },
+    {
+      "comment": "",
+      "id": "D05F81CF-515F-4364-B932-99C5E88C402B",
+      "kind": "verticalWire",
+      "label": "",
+      "position": {
+        "column": 9,
+        "row": 17
+      }
+    },
+    {
+      "comment": "",
+      "counterPreset": 8,
+      "id": "75F17740-CCEC-4B05-943F-4AF0EF181E48",
+      "kind": "counter",
+      "label": "C0",
+      "position": {
+        "column": 9,
+        "row": 9
+      }
+    }
+  ],
+  "name": "09カイ-確認修正版",
+  "rows": 20,
+  "version": 3
+}
