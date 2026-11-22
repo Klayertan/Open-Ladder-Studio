@@ -29,6 +29,7 @@ struct TimingDiagramView: View {
                 let span = windowSeconds == 0 ? max(10,elapsed+1) : Double(windowSeconds)
                 let scale = max(2,(geometry.size.width-TimingDiagramRenderer.labelWidth-12)/span)
                 let width = TimingDiagramRenderer.labelWidth + max(span,elapsed+1)*scale
+                let hasOverflow = width > geometry.size.width
                 let count = max(1,TimingDiagramRenderer.addresses(in:document.circuit).count)
                 let rowSpacing = max(30, min(TimingDiagramRenderer.rowHeight, (geometry.size.height - TimingDiagramRenderer.headerHeight) / CGFloat(count)))
                 let height = TimingDiagramRenderer.headerHeight + CGFloat(count)*rowSpacing
@@ -51,10 +52,10 @@ struct TimingDiagramView: View {
                                 }
                             }.frame(height:max(100,height))
                             .onChange(of:state.milliseconds/100) { _, _ in
-                                if follow { reader.scrollTo("timing.latest",anchor:.trailing) }
+                                if follow && hasOverflow { reader.scrollTo("timing.latest",anchor:.trailing) }
                             }
                             .onChange(of:follow) { _, active in
-                                if active { reader.scrollTo("timing.latest",anchor:.trailing) }
+                                if active && hasOverflow { reader.scrollTo("timing.latest",anchor:.trailing) }
                             }
                         }
                     }
@@ -112,8 +113,9 @@ struct TimingWindowView: View {
         window.title = String(localized: "timing.title")
         window.isReleasedWhenClosed = false
         let hosting = NSHostingController(rootView: TimingWindowView(model: model, document: document))
-        hosting.sizingOptions = [.minSize]
+        hosting.sizingOptions = []
         window.contentViewController = hosting
+        window.contentMinSize = NSSize(width: 740, height: 440)
         window.setContentSize(defaultSize)
         window.center()
         return NSWindowController(window: window)

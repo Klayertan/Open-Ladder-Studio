@@ -205,8 +205,10 @@ public struct LadderSimulator: Sendable {
                 state.counters[output.label] = counter
                 state.bits[output.label] = counter.done
             }
+            var nodes = poweredNodes()
             for output in outputs {
-                let powered = poweredNodes().contains(output.position)
+                let powered = nodes.contains(output.position)
+                let previousBit = state[output.label]
                 switch output.kind {
                 case .coil: state.bits[output.label] = powered
                 case .setCoil: if powered { state.bits[output.label] = true }
@@ -220,6 +222,8 @@ public struct LadderSimulator: Sendable {
                     state.bits[output.label] = timer.done
                 default: break
                 }
+                // Contacts read only device bits. Reuse the graph until an output changes one.
+                if state[output.label] != previousBit { nodes = poweredNodes() }
             }
             recordSignals()
             if oldBits == state.bits && oldTimers == state.timers && oldCounters == state.counters && oldPulses == state.pulses {

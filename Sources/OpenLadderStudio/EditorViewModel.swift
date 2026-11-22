@@ -172,7 +172,9 @@ final class EditorViewModel: ObservableObject {
         simulationTask = Task { [weak self] in
             var last = ContinuousClock.now
             while !Task.isCancelled {
-                do { try await Task.sleep(for: .milliseconds(20)) } catch { break }
+                // Publish one snapshot per display tick. The core still scans every 10 ms
+                // and records transitions between snapshots, including brief pulses.
+                do { try await Task.sleep(for: .milliseconds(100)) } catch { break }
                 let now = ContinuousClock.now
                 let duration = last.duration(to: now).components
                 let milliseconds = Int(duration.seconds * 1_000 + duration.attoseconds / 1_000_000_000_000_000)
