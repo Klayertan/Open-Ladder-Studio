@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 import LadderCore
 
 struct EditorView: View {
@@ -8,6 +9,7 @@ struct EditorView: View {
     @AppStorage("appearance") private var appearance = "system"
     @State private var showInspector = true
     @State private var pendingExample: Int?
+    @State private var timingWindow: NSWindowController?
     @State private var viewport = CGSize(width: 800, height: 700)
     init(document: LadderDocument) {
         self.document = document
@@ -23,16 +25,10 @@ struct EditorView: View {
                     VStack(spacing: 0) {
                         editorHeader
                         Divider()
-                        VSplitView {
-                            LadderCanvasView(model: model, document: document, viewport: $viewport).frame(minHeight:120)
-                            if model.showSimulation && model.showTimingDiagram {
-                                TimingDiagramView(model:model,document:document)
-                                    .frame(minHeight:150,idealHeight:260)
-                            }
-                        }
+                        LadderCanvasView(model: model, document: document, viewport: $viewport).frame(minHeight: 120)
                         if model.showSimulation {
                             Divider()
-                            SimulationPanel(model: model, document: document).frame(height: 208)
+                            SimulationPanel(model: model, document: document, openTiming: openTimingWindow).frame(height: 208)
                         }
                         if model.showValidation {
                             Divider()
@@ -56,7 +52,11 @@ struct EditorView: View {
         .preferredColorScheme(appearance == "system" ? nil : appearance == "dark" ? .dark : .light)
         .focusedSceneValue(\.ladderEditor, model)
         .onAppear { model.undoManager = undoManager }
-        .onDisappear { model.pauseSimulation() }
+        .onDisappear {
+            timingWindow?.close()
+            timingWindow = nil
+            model.pauseSimulation()
+        }
         .onChange(of: model.showSimulation) { _, visible in
             if visible { model.showValidation = false } else { model.pauseSimulation() }
         }
@@ -69,6 +69,17 @@ struct EditorView: View {
             Button("common.cancel", role: .cancel) { pendingExample = nil }
         } message: { Text("example.undoHint") }
     }
+    private func openTimingWindow() {
+        guard model.prepareSimulation() else { return }
+        if let timingWindow {
+            timingWindow.showWindow(nil)
+            return
+        }
+        let controller = TimingWindowView.makeWindow(model: model, document: document)
+        timingWindow = controller
+        controller.showWindow(nil)
+    }
+
     private var editorHeader: some View {
         HStack(spacing: 10) {
             Image(systemName: "point.3.connected.trianglepath.dotted").foregroundStyle(DiagramRenderer.accent)

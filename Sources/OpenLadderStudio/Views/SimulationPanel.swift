@@ -5,7 +5,7 @@ struct SimulationPanel: View {
     @ObservedObject var model: EditorViewModel
     @ObservedObject var document: LadderDocument
 
-    private var inputs: [String] { Array(Set(document.circuit.elements.map(\.label).filter { $0.hasPrefix("X") })).sorted() }
+    let openTiming: () -> Void
     private var outputs: [String] { Array(Set(document.circuit.elements.filter { $0.kind.isOutput && $0.label.hasPrefix("Y") }.map(\.label))).sorted() }
     private var timers: [String] { (model.simulation?.timers.keys.map { $0 } ?? []).sorted() }
     private func comment(_ address: String) -> String { document.circuit.device(address).comment }
@@ -15,35 +15,15 @@ struct SimulationPanel: View {
         VStack(alignment: .leading, spacing: 13) {
             HStack(spacing: 12) {
                 Label("simulation.title", systemImage: "waveform.path.ecg").font(.system(size: 12, weight: .semibold))
-                Circle().fill(model.isSimulationRunning ? Color.green : .secondary).frame(width: 6, height: 6)
-                Text(model.isSimulationRunning ? "simulation.running" : "simulation.paused").font(.system(size: 10)).foregroundStyle(.secondary)
                 Spacer()
-                Button { model.showTimingDiagram.toggle() } label: { Image(systemName:"waveform.path") }
-                    .tint(model.showTimingDiagram ? DiagramRenderer.accent : .secondary).help("timing.toggle")
-                Text(String(format: "t = %.2f s", Double(model.simulation?.milliseconds ?? 0) / 1_000))
-                    .font(.system(size: 11, design: .monospaced)).monospacedDigit()
-                Button(model.isSimulationRunning ? "simulation.pause" : "simulation.run") {
-                    if model.isSimulationRunning { model.pauseSimulation() } else { model.startSimulation() }
-                }.buttonStyle(.borderedProminent)
-                Button("simulation.step") { model.advanceSimulation(milliseconds: 100) }.disabled(model.isSimulationRunning)
-                Button("simulation.reset") { model.resetSimulation() }
+                Button(action: openTiming) {
+                    Label("timing.title", systemImage: "waveform.path")
+                }.help("timing.open")
+                SimulationTransportControls(model: model)
             }
             ScrollView(.horizontal) {
               HStack(alignment: .center, spacing: 20) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("simulation.inputs").font(.system(size: 9, weight: .semibold)).foregroundStyle(.secondary)
-                    HStack(spacing: 8) {
-                        ForEach(inputs, id: \.self) { address in
-                            VStack(spacing: 4) {
-                                Button { model.pressInput(address) } label: {
-                                    Text("\(address) \(comment(address))").font(.system(size: 11, weight: .medium))
-                                }.help("simulation.momentary")
-                                Toggle("simulation.hold", isOn: Binding(get: { model.simulation?[address] ?? false }, set: { model.setInput(address, pressed: $0) }))
-                                    .font(.system(size: 9)).toggleStyle(.checkbox)
-                            }
-                        }
-                    }
-                }
+                SimulationInputControls(model: model, document: document)
                 Divider().frame(height: 55)
                 HStack(spacing: 15) {
                     ForEach(outputs, id: \.self) { address in
@@ -82,6 +62,53 @@ struct SimulationPanel: View {
         }
         .padding(.horizontal, 18).padding(.vertical, 12).background(.bar)
         .onAppear { _ = model.prepareSimulation() }
+    }
+}
+
+struct SimulationTransportControls: View {
+    @ObservedObject var model: EditorViewModel
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Circle().fill(model.isSimulationRunning ? Color.green : .secondary).frame(width: 6, height: 6)
+                .accessibilityHidden(true)
+            Text(model.isSimulationRunning ? "simulation.running" : "simulation.paused")
+                .font(.system(size: 10)).foregroundStyle(.secondary)
+            Text(String(format: "t = %.2f s", Double(model.simulation?.milliseconds ?? 0) / 1_000))
+                .font(.system(size: 11, design: .monospaced)).monospacedDigit()
+            Button(model.isSimulationRunning ? "simulation.pause" : "simulation.run") {
+                if model.isSimulationRunning { model.pauseSimulation() } else { model.startSimulation() }
+            }.buttonStyle(.borderedProminent)
+            Button("simulation.step") { model.advanceSimulation(milliseconds: 100) }.disabled(model.isSimulationRunning)
+            Button("simulation.reset") { model.resetSimulation() }
+        }
+    }
+}
+
+struct SimulationInputControls: View {
+    @ObservedObject var model: EditorViewModel
+    @ObservedObject var document: LadderDocument
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("simulation.inputs").font(.system(size: 9, weight: .semibold)).foregroundStyle(.secondary)
+            HStack(spacing: 8) {
+                ForEach(document.circuit.addresses.filter { $0.hasPrefix("X") }, id: \.self) { address in
+                    let comment = document.circuit.device(address).comment
+                    VStack(spacing: 4) {
+                        Button { model.pressInput(address) } label: {
+                            Text("\(address) \(comment)").font(.system(size: 11, weight: .medium))
+                        }.help("simulation.momentary")
+                        Toggle("simulation.hold", isOn: Binding(
+                            get: { model.simulation?[address] ?? false },
+                            set: { model.setInput(address, pressed: $0) }
+                        ))
+                        .font(.system(size: 9)).toggleStyle(.switch).controlSize(.mini)
+                        .accessibilityLabel(Text("\(address) \(String(localized: "simulation.hold"))"))
+                    }
+                }
+            }
+        }
     }
 }
 

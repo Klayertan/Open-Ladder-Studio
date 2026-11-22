@@ -69,13 +69,12 @@ strings = {
 'action.resize': ('Expand Grid', 'グリッドを拡張'), 'action.example': ('Replace Circuit', '回路を置き換え'), 'action.rename': ('Rename Circuit', '回路名を変更')
 }
 strings.update({
+'timing.circuit': ('Live circuit preview', '回路のライブプレビュー'),
 'timing.title': ('Timing diagram', 'タイミングチャート'),
 'timing.window': ('Visible time span', '表示時間幅'),
 'timing.all': ('Fit history', '全履歴'),
 'timing.follow': ('Follow', '追従'),
-'timing.close': ('Close expanded chart', '拡大表示を閉じる'),
-'timing.expand': ('Expand timing diagram', 'タイミングチャートを拡大'),
-'timing.toggle': ('Show or hide timing diagram', 'タイミングチャートを表示／非表示'),
+'timing.open': ('Open timing diagram window', 'タイミングチャートを別ウインドウで開く'),
 'timing.accessibility': ('Live device timing diagram', 'デバイスのライブタイミングチャート'),
 'timing.legend': ('High = ON · Hatching = TON counting · Vertical dots = brief pulses · Counter numbers = count events · Last 120 s retained', '上段＝ON・斜線＝タイマ計時中・縦線上の点＝瞬時パルス・カウンタ数字＝カウント・直近120秒を保持'),
  'tool.wire': ('Wire pen', '配線ペン'),
@@ -97,9 +96,9 @@ strings.update({
 'simulation.running': ('Running', '実行中'), 'simulation.paused': ('Paused', '一時停止'),
 'simulation.run': ('Run', '実行'), 'simulation.pause': ('Pause', '一時停止'),
 'simulation.step': ('Step 0.1 s', '0.1秒進める'), 'simulation.reset': ('Reset', 'リセット'),
-'simulation.inputs': ('MOMENTARY INPUTS', '押しボタン入力'),
+'simulation.inputs': ('INPUT SWITCHES', '入力スイッチ'),
 'simulation.momentary': ('Press and release the input once.', '入力を一度押して離します。'),
-'simulation.hold': ('Hold pressed', '押したまま'),
+'simulation.hold': ('Maintained', '保持'),
 'simulation.on': ('ON', '点灯'), 'simulation.off': ('OFF', '消灯'),
 'simulation.hint': ('Run, then press an input button. Timer values remain editable in the inspector.', '実行して入力ボタンを押してください。タイマ設定値はインスペクタで編集できます。'),
 'simulation.educational': ('Educational relay simulation - 10 ms time steps. Changes to the circuit pause and reset the simulator.', '教育用リレーシミュレーション・10ms刻み。回路を編集すると実行を停止して状態をリセットします。'),

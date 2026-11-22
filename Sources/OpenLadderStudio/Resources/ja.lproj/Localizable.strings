@@ -117,8 +117,8 @@
 "simulation.error.unstable" = "リレー状態が収束しません。矛盾する命令や自己反転する帰還を確認してください。";
 "simulation.error.writer" = "%@に対して複数の出力命令が重複しています。";
 "simulation.hint" = "実行して入力ボタンを押してください。タイマ設定値はインスペクタで編集できます。";
-"simulation.hold" = "押したまま";
-"simulation.inputs" = "押しボタン入力";
+"simulation.hold" = "保持";
+"simulation.inputs" = "入力スイッチ";
 "simulation.momentary" = "入力を一度押して離します。";
 "simulation.off" = "消灯";
 "simulation.on" = "点灯";
@@ -146,12 +146,11 @@
 "symbol.verticalWire" = "縦配線";
 "timing.accessibility" = "デバイスのライブタイミングチャート";
 "timing.all" = "全履歴";
-"timing.close" = "拡大表示を閉じる";
-"timing.expand" = "タイミングチャートを拡大";
+"timing.circuit" = "回路のライブプレビュー";
 "timing.follow" = "追従";
 "timing.legend" = "上段＝ON・斜線＝タイマ計時中・縦線上の点＝瞬時パルス・カウンタ数字＝カウント・直近120秒を保持";
+"timing.open" = "タイミングチャートを別ウインドウで開く";
 "timing.title" = "タイミングチャート";
-"timing.toggle" = "タイミングチャートを表示／非表示";
 "timing.window" = "表示時間幅";
 "tool.branch" = "並列分岐";
 "tool.select" = "選択";

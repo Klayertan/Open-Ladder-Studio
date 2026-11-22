@@ -117,8 +117,8 @@
 "simulation.error.unstable" = "Relay logic did not settle. Check for contradictory or self-inverting feedback.";
 "simulation.error.writer" = "Multiple incompatible output instructions write to %@.";
 "simulation.hint" = "Run, then press an input button. Timer values remain editable in the inspector.";
-"simulation.hold" = "Hold pressed";
-"simulation.inputs" = "MOMENTARY INPUTS";
+"simulation.hold" = "Maintained";
+"simulation.inputs" = "INPUT SWITCHES";
 "simulation.momentary" = "Press and release the input once.";
 "simulation.off" = "OFF";
 "simulation.on" = "ON";
@@ -146,12 +146,11 @@
 "symbol.verticalWire" = "Vertical wire";
 "timing.accessibility" = "Live device timing diagram";
 "timing.all" = "Fit history";
-"timing.close" = "Close expanded chart";
-"timing.expand" = "Expand timing diagram";
+"timing.circuit" = "Live circuit preview";
 "timing.follow" = "Follow";
 "timing.legend" = "High = ON · Hatching = TON counting · Vertical dots = brief pulses · Counter numbers = count events · Last 120 s retained";
+"timing.open" = "Open timing diagram window";
 "timing.title" = "Timing diagram";
-"timing.toggle" = "Show or hide timing diagram";
 "timing.window" = "Visible time span";
 "tool.branch" = "Parallel branch";
 "tool.select" = "Select";

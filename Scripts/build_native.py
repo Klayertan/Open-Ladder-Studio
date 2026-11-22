@@ -27,7 +27,9 @@ if link_path.is_symlink(): link_path.unlink()
 link_path.symlink_to(out, target_is_directory=True)
 def run(command, **kwargs):
     subprocess.run([str(x) for x in command], cwd=root, check=True, **kwargs)
-base=[swift, '-sdk',sdk, '-target','arm64-apple-macosx14.0','-swift-version','6','-g','-Onone','-enable-testing']
+base=[swift, '-sdk',sdk, '-target','arm64-apple-macosx14.0','-swift-version','6','-g']
+# Keep distributed builds responsive when live simulation and both canvases are active.
+base += ['-Onone', '-enable-testing'] if args.test else ['-O']
 core=out/'LadderCore.framework'; modules=core/'Modules/LadderCore.swiftmodule'; modules.mkdir(parents=True,exist_ok=True)
 core_sources=sorted((root/'Sources/LadderCore').glob('*.swift'))
 run(base+['-emit-library','-emit-module','-module-name','LadderCore','-emit-module-path',modules/'arm64-apple-macos.swiftmodule','-Xlinker','-install_name','-Xlinker','@rpath/LadderCore.framework/LadderCore',*core_sources,'-o',core/'LadderCore'])

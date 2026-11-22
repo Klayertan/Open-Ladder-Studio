@@ -30,7 +30,6 @@ final class EditorViewModel: ObservableObject {
     @Published var dragOffset = GridPoint(0, 0)
     @Published var statusKey = "status.ready"
     @Published var showSimulation = false
-    @Published var showTimingDiagram = true
     @Published private(set) var simulation: SimulationState?
     @Published private(set) var isSimulationRunning = false
     private var simulator: LadderSimulator?

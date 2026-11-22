@@ -1,6 +1,6 @@
 # Live timing diagram
 
-Opening Simulation now also shows a resizable timing-chart pane below the ladder. The waveform button beside the simulation controls hides/shows it. The chart's expand button opens a larger view; the divider between ladder and chart can be dragged.
+Open Simulation, then click Timing diagram to open a separate resizable window. The live circuit is on the left, the chart is on the right, and the input switches are along the bottom. Drag the divider to resize the panes. The popup and editor share the same simulation state, including Run, Pause, Step, Reset, and the momentary and held inputs.
 
 Rows include every numbered X, M, T, C and Y device used in the circuit. Each row shows its device comment, live ON indicator, and timer preset or current/preset counter value where relevant. Horizontal high/low steps show the actual recorded bit state. Hatched timer intervals show enabled TON timers still counting. Counter numbers mark increments, and dots on vertical edges mark zero-duration pulses (for example a momentary button or a timer feedback bit consumed within one step).
 
